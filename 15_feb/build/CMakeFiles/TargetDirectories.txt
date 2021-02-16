@@ -1,0 +1,3 @@
+C:/Users/edkru/source/repos/GeekBrains/15_feb/build/CMakeFiles/First_app.dir
+C:/Users/edkru/source/repos/GeekBrains/15_feb/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/edkru/source/repos/GeekBrains/15_feb/build/CMakeFiles/ZERO_CHECK.dir
