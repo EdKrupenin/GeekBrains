@@ -26526,6 +26526,6 @@ int main()
              2
 # 6 "lesson_one.cpp"
                      , "Russian");
-    std::cout<<"Привет мир!!!"<<std::endl;
+    std::cout<<"Привет GeekBrains!!!"<<std::endl;
     return 0;
 }
