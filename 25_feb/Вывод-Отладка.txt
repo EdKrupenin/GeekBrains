@@ -1,0 +1,14 @@
+﻿"lesson_c.exe" (Win32). Загружено "C:\Users\edkru\source\repos\GeekBrains\25_feb\lesson_c\Debug\lesson_c.exe". Символы загружены.
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\ntdll.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel32.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\KernelBase.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcp140d.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\vcruntime140d.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\ucrtbased.dll". 
+Поток 0x1be4 завершился с кодом 0 (0x0).
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel.appcore.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcrt.dll". 
+"lesson_c.exe" (Win32). Загружено "C:\Windows\SysWOW64\rpcrt4.dll". 
+Поток 0x13f8 завершился с кодом 0 (0x0).
+Поток 0xdc8 завершился с кодом 0 (0x0).
+Программа "[14236] lesson_c.exe" завершилась с кодом 0 (0x0).
