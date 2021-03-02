@@ -45,11 +45,11 @@ int main()
 
 	int* ponterMass;
 	ponterMass = mass[0][0];
-	int** ponter2 = &ponterMass;
+	int*** ponter2 = (int***)&mass[0];
 	//3*3 - проход по i получим mass[1][0][0]
 	//+3 - проход по j получим mass[1][1][0]
 	//+1 - проход по K получим mass[1][1][1]
-	std::cout << *(ponterMass+13) << " ";
+	std::cout << ***ponter2 << " ";
 	std::cout << mass[1][1][1] << " ";
 
 }
