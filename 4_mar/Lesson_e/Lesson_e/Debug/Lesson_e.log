@@ -1,2 +1,4 @@
-﻿  Lesson_e.cpp
-  Lesson_e.vcxproj -> C:\Users\edkru\source\repos\GeekBrains\4_mar\Lesson_e\Debug\Lesson_e.exe
+﻿  Source_five.cpp
+C:\Users\Programmer\source\repos\GeekBrains-main\4_mar\Lesson_e\Lesson_e\Source_five.cpp(21,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Programmer\source\repos\GeekBrains-main\4_mar\Lesson_e\Lesson_e\Source_five.cpp(26,24): warning C4018: <: несоответствие типов со знаком и без знака
+  Lesson_e.vcxproj -> C:\Users\Programmer\source\repos\GeekBrains-main\4_mar\Lesson_e\Debug\Lesson_e.exe
