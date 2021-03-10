@@ -88,4 +88,5 @@ int main()
 	int* Mass5 = oneMoreTime(6,1,1,1,1,0,0);
 	(*printArray)(Mass5, 6);
 	(*printArray)(mass3, (sizeof(mass3) / sizeof(int)));
+	(*freeMemory)(Mass5);
 }

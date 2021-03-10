@@ -24,6 +24,7 @@ namespace Lesson_E {
 				if ((i + sht) < length) arr[i] = arrCopy[(i + sht)];
 				else arr[i] = arrCopy[j++];
 			}
+			delete[] arrCopy;
 			return true;
 		}
 		else if (sht < 0) {
@@ -43,11 +44,15 @@ namespace Lesson_E {
 				if ((sht - i) > 0)	arr[i] = arrCopy[(length -sht + i)];
 				else arr[i] = arrCopy[j++];
 			}
+			delete[] arrCopy;
 			return true;
 		}
 		else
 		{
-			if (sht == 0) return false;
+			if (sht == 0) {
+				delete[] arrCopy;
+				return false;
+			}
 		}
 	}
 
