@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-void fileCreate(std::string &wordSave,std::string &fileName) {
+void fileCreate(std::string& wordSave, std::string& fileName) {
 	std::ofstream fileOut;
 	fileOut.open(fileName);
 	if (fileOut.is_open()) {
@@ -22,12 +22,12 @@ void сoncatenationFile(std::string fileNameOne, std::string fileNameTwo) {
 	std::string buffer;
 	fileOne.open(fileNameOne);
 	fileTwo.open(fileNameTwo, std::ofstream::app);
-	if (fileOne.is_open()&& fileTwo.is_open()) {
+	if (fileOne.is_open() && fileTwo.is_open()) {
 		std::cout << "Оба файла открылись" << std::endl;
 		while (!fileOne.eof())
 		{
 			std::getline(fileOne, buffer);
-			fileTwo<< ("\n" + buffer);
+			fileTwo << ("\n" + buffer);
 		}
 	}
 	else
@@ -35,11 +35,34 @@ void сoncatenationFile(std::string fileNameOne, std::string fileNameTwo) {
 		if (!fileOne.is_open()) std::cout << "Ошибка открытия 1go файла !!!" << std::endl;
 		if (!fileTwo.is_open()) std::cout << "Ошибка открытия 2go файла !!!" << std::endl;
 	}
-	fileOne.close(); 
+	fileOne.close();
 	fileTwo.close();
 }
 
-int main()
+bool findArguments(int& argc, char** a, std::string fileName) {
+	std::ifstream fileOne;
+	std::string buffer;
+	fileOne.open(fileName);
+	if (!fileOne.is_open()) return false;
+	if (argc > 1) {
+		while (!fileOne.eof())
+		{
+			std::getline(fileOne, buffer);
+			if (buffer.find(a[1])) {
+				fileOne.close();
+				return true;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Not application arg" << std::endl;
+		fileOne.close();
+		return false;
+	}
+}
+
+int main(int argc, char* argv[])
 {
 	std::string wordOne = "\tKarl Heinrich Marx was a German philosopher, economist, historian, sociologist, political theorist, journalist and socialist revolutionary.\n"
 		"Born in Trier, Germany, Marx studied law and philosophy at university. He married Jenny von Westphalen in 1843. Due to his political publications,\n"
@@ -56,8 +79,5 @@ int main()
 	fileCreate(wordTwo, fileTwo);
 	//---------------------------------
 	сoncatenationFile(fileOne, fileTwo);
-	
-	
-	
-	
+	std::cout << (findArguments(argc, argv, fileOne))<<std::endl;
 }
