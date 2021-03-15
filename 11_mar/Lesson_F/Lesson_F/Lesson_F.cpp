@@ -20,6 +20,7 @@ void сoncatenationFile(std::string fileNameOne, std::string fileNameTwo) {
 	std::ifstream fileOne;
 	std::ofstream fileTwo;
 	std::string buffer;
+	bool flag  = false;
 	fileOne.open(fileNameOne);
 	fileTwo.open(fileNameTwo, std::ofstream::app);
 	if (fileOne.is_open() && fileTwo.is_open()) {
@@ -29,14 +30,20 @@ void сoncatenationFile(std::string fileNameOne, std::string fileNameTwo) {
 			std::getline(fileOne, buffer);
 			fileTwo << ("\n" + buffer);
 		}
+		fileOne.close();
+		fileTwo.close();
 	}
 	else
 	{
-		if (!fileOne.is_open()) std::cout << "Ошибка открытия 1go файла !!!" << std::endl;
-		if (!fileTwo.is_open()) std::cout << "Ошибка открытия 2go файла !!!" << std::endl;
+		if (!fileOne.is_open()){ 
+			std::cout << "Ошибка открытия 1go файла !!!" << std::endl;
+			flag = 1;
+		}
+		if (!fileTwo.is_open()){
+			std::cout << "Ошибка открытия 2go файла !!!" << std::endl;
+			if(!flag) fileOne.close();
+		}
 	}
-	fileOne.close();
-	fileTwo.close();
 }
 
 bool findArguments(int& argc, char** a, std::string fileName) {
