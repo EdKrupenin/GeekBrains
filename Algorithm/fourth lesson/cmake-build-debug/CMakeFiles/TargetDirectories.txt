@@ -1,0 +1,3 @@
+C:/Users/edkru/source/repos/GeekBrains/Algorithm/fourth lesson/cmake-build-debug/CMakeFiles/fourth_lesson.dir
+C:/Users/edkru/source/repos/GeekBrains/Algorithm/fourth lesson/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/edkru/source/repos/GeekBrains/Algorithm/fourth lesson/cmake-build-debug/CMakeFiles/rebuild_cache.dir
