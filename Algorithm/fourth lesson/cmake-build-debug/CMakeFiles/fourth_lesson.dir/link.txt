@@ -1,3 +1,3 @@
-C:\Users\edkru\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\203.7717.62\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\fourth_lesson.dir/objects.a
+C:\Users\edkru\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\211.7142.21\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\fourth_lesson.dir/objects.a
 C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\fourth_lesson.dir/objects.a @CMakeFiles\fourth_lesson.dir\objects1.rsp
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\fourth_lesson.dir/objects.a -Wl,--no-whole-archive  -o fourth_lesson.exe -Wl,--out-implib,libfourth_lesson.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\fourth_lesson.dir\linklibs.rsp
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\fourth_lesson.dir/objects.a -Wl,--no-whole-archive -o fourth_lesson.exe -Wl,--out-implib,libfourth_lesson.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\fourth_lesson.dir\linklibs.rsp

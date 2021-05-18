@@ -80,6 +80,8 @@ void annull(){
             board[i][j] = 0;
         }
     }
+    board[0][1] = 1;
+    board[0][4] = 1;
 }
 
 ///Печать поля в консоли
@@ -97,13 +99,32 @@ void printBoard(){
 /// \param y - координата
 /// \return кол-во ходов
 int roots(int x, int y){
-    if (board[x][y] ==1) return 0; // проверка на препядствия, т.к. массив глобальный передавать не надо, иначе передал
+    if (board[x][y] == 1) return 0; // проверка на препядствия, т.к. массив глобальный передавать не надо, иначе передал
     // бы с помощью указателя *
-    else{
-        if(x==0 && y==0) return 0; // если к клетке не подойти сверху и слева то пути нет...
-        else if(x==0 ^ y==0) return 1; // если пройти можно только с одной стороны
-             else return roots(x,y-1)+roots(x-1,y); //во всех остальных случаях отправляемся по рекурсии ниже, до 0...
-    }
+    if (x == 0 && y == 0) return 0;
+    else if (x == 0) {
+            if (roots(x, y - 1)==0  && y!=1) return 0;
+            return 1;
+        } else if (y == 0) {
+            if (roots(x-1, y)==0  && x!=1) return 0;
+            return 1;
+        }
+        return roots(x, y - 1) + roots(x - 1, y);
+
+
+       /*else{
+        * if(x==0 && y==0) return 0; // если к клетке не подойти сверху и слева то пути нет...
+        else if(x==0)
+            {
+                if(roots(x,y-1)==0 && board[x][y-1] == 0 && y==1) return 0;
+                return 1;
+            } else
+                {
+                    if (y==0)
+                        if(roots(x-1,y)==0 && board[x][y-1] == 0 && x==1) return 0;
+                    return 1;
+                }*/
+    //}
 }
 
 void kingChess(){
