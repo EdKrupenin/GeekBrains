@@ -155,11 +155,5 @@ int main()
 		std::cout << '{' << n->prioritete << ", " << n->data << "} ";
 	}	
 	printQueue();
-
-
-
-
-
-	
-	
+	return 0;
 }
