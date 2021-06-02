@@ -3,6 +3,8 @@
 #define false 1 != 1
 typedef int boolean;
 
+#pragma region Бинарное дерево
+
 /// <summary>
 /// Узел дерева
 /// </summary>
@@ -137,12 +139,12 @@ boolean deleteKnot(TreeKnot* root, int key) {
 	else if (current->right == NULL) { //Если правая ссылка удаляемого элемента пустая
 		//то забираем все что было в левой части
 		if (isLeftChild)
-		//Если current слева то в левую ссылку родителя пишем то,
-		//что было в левой ссылке удаляемого элемента
+			//Если current слева то в левую ссылку родителя пишем то,
+			//что было в левой ссылке удаляемого элемента
 			parent->left = current->left;
 		else
-		//Если current справа то в правую ссылку родителя пишем то,
-		//что было в правой ссылке удаляемого элемента
+			//Если current справа то в правую ссылку родителя пишем то,
+			//что было в правой ссылке удаляемого элемента
 			parent->right = current->left;
 	}
 	else if (current->left == NULL) { //Если левая ссылка удаляемого элемента пустая
@@ -176,9 +178,11 @@ boolean deleteKnot(TreeKnot* root, int key) {
 	return true;
 
 }
+#pragma endregion
 
 int main()
 {
+#pragma region Бинарное дерево
 	//Выделять память не нужно, но нужно зафиксировать корень дерева
 	TreeKnot* tree = new TreeKnot{ 10, NULL, NULL };
 	treeInstrt(tree, 10);
@@ -200,4 +204,6 @@ int main()
 	deleteKnot(tree, 8); //один наследник с ключом 9
 	printTree(tree);
 	std::cout << std::endl;
+#pragma endregion
+	return 0;
 }
