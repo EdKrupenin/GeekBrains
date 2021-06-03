@@ -1,5 +1,8 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <iterator>
+#include <list>
+
 #define true 1 == 1
 #define false 1 != 1
 typedef int boolean;
@@ -271,12 +274,141 @@ boolean binSearch(TreeKnot* root, int key) {
 	//будем так ходить до NULL или до положительного результата
 }
 
+/// <summary>
+/// Рекурсивная функция подсчета элементов в дереве
+/// </summary>
+/// <param name="root">Ссылка на корень дерева</param>
+/// <param name="count">Ссылка на счетчик элементов</param>
+void countKnot(TreeKnot* root, int& count) {
+	//Пока корень не NULL и есть хотя бы 1 ссылка  идем вглубь и считаем
+	if (root && (root->left || root->right)) {
+		//Рекурсивно вызываем себя и считаем кол-во не листовых узлов в левой ветке
+		countKnot(root->left, count);
+		count++; //Если сюда зашли то этот узел точно не "листовой"
+		countKnot(root->right, count); //Аналогично поступаем с правой веткой
+	}
+}
+
+/// <summary>
+/// Рекурсивная функция подсчета элементов в дереве
+/// </summary>
+/// <param name="root">Ссылка на корень дерева</param>
+/// <param name="count">Ссылка на счетчик элементов</param>
+void countKnotTT(TreeKnot* root, int& count) {
+	//Пока корень не NULL и есть хотя бы 1 ссылка  идем вглубь и считаем
+	if (root) {
+		//Рекурсивно вызываем себя и считаем кол-во не листовых узлов в левой ветке
+		countKnot(root->left, count);
+		count++; //Если сюда зашли то этот узел точно не "листовой"
+		countKnot(root->right, count); //Аналогично поступаем с правой веткой
+	}
+}
+
+/// <summary>
+/// Проверка дерева на сбалансированость
+/// </summary>
+/// <param name="root">Ссылка на корень дерева</param>
+/// <returns>Ответ на запрос, да или нет</returns>
+boolean isBalancedTree(TreeKnot* root) {
+	int countL = 0; //Создаем счетчики для левой и правой части
+	int countR = 0;
+	countKnot(root->left, countL); //Считаем кол-во узлов до "листьев"
+	countKnot(root->right, countR);
+	//Проверяем на условие баланса
+	if ((countL == countR) || (countL - 1 == countR)) return true;
+	else return false;
+}
+
+/// <summary>
+/// Классическая вставка нового узла 
+/// </summary>
+/// <param name="p">Ссылка на дерево</param>
+/// <param name="key">Ключ</param>
+/// <returns>Обновленное дерево</returns>
+TreeKnot* insTree(TreeKnot* p, int key) 
+{
+	if (!p) return new TreeKnot{ key,NULL,NULL };
+	if (p->key > key)
+		p->left = insTree(p->left, key);
+	else
+		p->right = insTree(p->right, key);
+	return p;
+}
+
+TreeKnot* rotateright(TreeKnot* p) // правый поворот вокруг узла p
+{
+	TreeKnot* q = p->left;
+	if (!q) return p;
+	p->left = q->right;
+	q->right = p;
+	return q;
+}
+
+TreeKnot* rotateleft(TreeKnot* q) // левый поворот вокруг узла q
+{
+	TreeKnot* p = q->right;
+	if (!p) return q;
+	q->right = p->left;
+	p->left = q;
+	return p;
+}
+
+TreeKnot* insertroot(TreeKnot* p, int key) // вставка нового узла с ключом k в корень дерева p 
+{
+	if (!p) return new TreeKnot{ key,NULL,NULL };
+	if (key < p->key)
+	{
+		p->left = insertroot(p->left, key);
+		return rotateright(p);
+	}
+	else
+	{
+		p->right = insertroot(p->right, key);
+		return rotateleft(p);
+	}
+}
+
+TreeKnot* insertRND(TreeKnot* p, int key) // рандомизированная вставка нового узла с ключом k в дерево p
+{
+	if (!p) return new TreeKnot{ key,NULL,NULL };
+	if (rand() % (100 + 1) == 0)
+		return insertroot(p, key);
+	if (p->key > key)
+		p->left = insertRND(p->left, key);
+	else
+		p->right = insertRND(p->right, key);
+	return p;
+}
+
+double percentageOfBalancedFiftyTrees(std::list<TreeKnot>& fiftyTrees) {
+	int countTree = 50;
+	int countKnot = 1000;
+	int balancedTree = 0;
+	int countknot = 0;
+	for (int i = 0; i < countTree; i++)
+	{
+		TreeKnot* currentTree = new TreeKnot{ rand() % 100 + 1, NULL, NULL };;
+		for (int j = 0; j < countKnot; j++)
+		{
+			int rnd = rand() % 10000 + 1;
+			currentTree = insertroot(currentTree, rnd);
+		}
+		countKnotTT(currentTree, countknot);
+		if (isBalancedTree(currentTree)) balancedTree++;
+		fiftyTrees.push_back(*currentTree);
+	}
+	return (double)balancedTree * 100 / countTree;
+}
+
+
+
 
 int main()
 {
 #pragma region Бинарное дерево
 	//Выделять память не нужно, но нужно зафиксировать корень дерева
-	TreeKnot* tree = new TreeKnot{ 10, NULL, NULL };
+	TreeKnot* tree = NULL;//new TreeKnot{ 10, NULL, NULL };
+	tree = treeInstrt(tree, 10);
 	treeInstrt(tree, 10);
 	treeInstrt(tree, 8);
 	treeInstrt(tree, 19);
@@ -288,16 +420,22 @@ int main()
 	std::cout << std::endl;
 	std::cout << "8 in Tree = " << (binSearch(tree, 8) ? "True" : "False") << std::endl;
 	std::cout << "100 in Tree = " << (binSearch(tree, 100) ? "True" : "False") << std::endl;
+	int countTree = 0;
+	countKnot(tree, countTree);
+	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 
 	deleteKnot(tree, 5); //листовой
 	printTree(tree);
 	std::cout << std::endl;
+	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 	deleteKnot(tree, 19); //два наследника
 	printTree(tree);
 	std::cout << std::endl;
+	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 	deleteKnot(tree, 8); //один наследник с ключом 9
 	printTree(tree);
 	std::cout << std::endl;
+	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 	preOrderTravels(tree);
 	std::cout << std::endl;
 	inOrderTravels(tree);
@@ -315,5 +453,9 @@ int main()
 	file.close();
 	printTree(balanceTree);
 #pragma endregion
+
+	std::list<TreeKnot>fiftyTrees;
+	std::cout << "Percentage of balanced fifty trees is " << percentageOfBalancedFiftyTrees(fiftyTrees) << "%" << std::endl;
+	//copy(fiftyTrees.begin(), fiftyTrees.end(), std::ostream_iterator<int>(std::cout, " "));
 	return 0;
 }
