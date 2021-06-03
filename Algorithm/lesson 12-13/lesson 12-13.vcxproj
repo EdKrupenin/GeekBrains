@@ -144,6 +144,9 @@
   <ItemGroup>
     <ClInclude Include="lesson 12-13.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="balance.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

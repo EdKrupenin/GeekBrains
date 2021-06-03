@@ -24,4 +24,7 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="balance.txt" />
+  </ItemGroup>
 </Project>

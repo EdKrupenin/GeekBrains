@@ -1,7 +1,9 @@
 ﻿#include <iostream>
+#include <fstream>
 #define true 1 == 1
 #define false 1 != 1
 typedef int boolean;
+std::ifstream file;
 
 #pragma region Бинарное дерево
 
@@ -230,7 +232,27 @@ void postOrderTravals(TreeKnot* root) {
 }
 #pragma endregion
 
+/// <summary>
+/// Построение сбалансированного дерева из n узлов
+/// </summary>
+/// <param name="n">Количество узлов</param>
+/// <returns>Сбалансированное дерево</returns>
+TreeKnot* balancedTree(int n) {
+	TreeKnot* newKnot;
+	int x;
+	int nL; //Кол-во элементов в левой части дерева
+	int nR; //Кол-во элементов в правой части дерева
 
+	if (n == 0) return NULL; //Дошли до "дна" возвращаем указатель на пустоту
+	else { //Заполняем данными дерево и
+		   //посчитать корнем насколько большого дерева станет данный узел
+		file>>x;
+		nL = n / 2;		//Слева будет на один элемент больше т.к. 
+		nR = n - nL - 1; //мы уже работаем с одним узлом из множества n
+		newKnot = new TreeKnot{ x, balancedTree(nL), balancedTree(nR) };
+	}
+	return newKnot;
+}
 
 int main()
 {
@@ -257,6 +279,16 @@ int main()
 	printTree(tree);
 	std::cout << std::endl;
 	inOrderTravels(tree);
+	TreeKnot* balanceTree = NULL;
+	file.open("balance.txt");
+	if (!file.is_open()) {
+		std::cout << "Can't open file!!!" << std::endl;
+		return 1;
+	}
+	const int count = 15; //Количество элементов в файле
+	balanceTree = balancedTree(count);
+	file.close();
+	printTree(balanceTree);
 #pragma endregion
 	return 0;
 }
