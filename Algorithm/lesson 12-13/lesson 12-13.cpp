@@ -178,7 +178,59 @@ boolean deleteKnot(TreeKnot* root, int key) {
 	return true;
 
 }
+
+/// <summary>
+/// Гарантированно пройдем дерево посетив каждый узел по одному разу...
+/// Центр - лево - право, используется для копирования деревьев
+/// </summary>
+/// <param name="root"></param>
+void preOrderTravels(TreeKnot* root) {
+	if (root) {
+		std::cout << root->key << std::endl;
+		preOrderTravels(root->left);
+		preOrderTravels(root->right);
+	}
+	/*			     0
+				   /    \
+				  /      \
+				 /        \
+				/          \
+			   1            8
+			 /   \       /     \
+			2     5     9      12
+		   / \   / \   / \    /  \
+		  3   4  6  7 10 11  13  14
+	*/
+}
+
+/// <summary>
+/// Левая ветка - корень - правая ветка
+/// Если надо обойти двоичное дерево в порядке возрастания узлов...
+/// </summary>
+/// <param name="root"></param>
+void inOrderTravels(TreeKnot* root) {
+	if (root) {
+		preOrderTravels(root->left);
+		std::cout << root->key << std::endl;
+		preOrderTravels(root->right);
+	}
+}
+
+/// <summary>
+/// Левая ветка, правая ветка, корень
+/// Используют для полного удаления дерева
+/// </summary>
+/// <param name="root"></param>
+void postOrderTravals(TreeKnot* root) {
+	if (root) {
+		preOrderTravels(root->left);
+		preOrderTravels(root->right);
+		std::cout << root->key << std::endl;
+	}
+}
 #pragma endregion
+
+
 
 int main()
 {
@@ -204,6 +256,7 @@ int main()
 	deleteKnot(tree, 8); //один наследник с ключом 9
 	printTree(tree);
 	std::cout << std::endl;
+	inOrderTravels(tree);
 #pragma endregion
 	return 0;
 }
