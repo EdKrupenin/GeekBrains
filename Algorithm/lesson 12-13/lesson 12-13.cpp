@@ -188,7 +188,7 @@ boolean deleteKnot(TreeKnot* root, int key) {
 /// <param name="root"></param>
 void preOrderTravels(TreeKnot* root) {
 	if (root) {
-		std::cout << root->key << std::endl;
+		std::cout << root->key << " ";
 		preOrderTravels(root->left);
 		preOrderTravels(root->right);
 	}
@@ -213,7 +213,7 @@ void preOrderTravels(TreeKnot* root) {
 void inOrderTravels(TreeKnot* root) {
 	if (root) {
 		preOrderTravels(root->left);
-		std::cout << root->key << std::endl;
+		std::cout << root->key << " ";
 		preOrderTravels(root->right);
 	}
 }
@@ -227,10 +227,9 @@ void postOrderTravals(TreeKnot* root) {
 	if (root) {
 		preOrderTravels(root->left);
 		preOrderTravels(root->right);
-		std::cout << root->key << std::endl;
+		std::cout << root->key << " ";
 	}
 }
-#pragma endregion
 
 /// <summary>
 /// Построение сбалансированного дерева из n узлов
@@ -246,13 +245,32 @@ TreeKnot* balancedTree(int n) {
 	if (n == 0) return NULL; //Дошли до "дна" возвращаем указатель на пустоту
 	else { //Заполняем данными дерево и
 		   //посчитать корнем насколько большого дерева станет данный узел
-		file>>x;
+		file >> x;
 		nL = n / 2;		//Слева будет на один элемент больше т.к. 
 		nR = n - nL - 1; //мы уже работаем с одним узлом из множества n
 		newKnot = new TreeKnot{ x, balancedTree(nL), balancedTree(nR) };
 	}
 	return newKnot;
 }
+
+#pragma endregion
+
+/// <summary>
+/// Рекурсивный поиск значения в дереве
+/// </summary>
+/// <param name="root">Ссылка на корень дерева</param>
+/// <param name="key">Искомый ключ</param>
+/// <returns>Результат поиска успех или провал</returns>
+boolean binSearch(TreeKnot* root, int key) {
+	if (root == NULL) return false;
+	if (root->key == key) return true;
+	//Если искомый ключ(который ищем) больше корневого ключа на данном этапе то идем вправо
+	if (root->key < key) return binSearch(root->right, key);
+	//Иначе влево
+	else return binSearch(root->left, key);
+	//будем так ходить до NULL или до положительного результата
+}
+
 
 int main()
 {
@@ -268,6 +286,8 @@ int main()
 	treeInstrt(tree, 21);
 	printTree(tree);
 	std::cout << std::endl;
+	std::cout << "8 in Tree = " << (binSearch(tree, 8) ? "True" : "False") << std::endl;
+	std::cout << "100 in Tree = " << (binSearch(tree, 100) ? "True" : "False") << std::endl;
 
 	deleteKnot(tree, 5); //листовой
 	printTree(tree);
@@ -278,7 +298,12 @@ int main()
 	deleteKnot(tree, 8); //один наследник с ключом 9
 	printTree(tree);
 	std::cout << std::endl;
+	preOrderTravels(tree);
+	std::cout << std::endl;
 	inOrderTravels(tree);
+	std::cout << std::endl;
+	postOrderTravals(tree);
+	std::cout << std::endl;
 	TreeKnot* balanceTree = NULL;
 	file.open("balance.txt");
 	if (!file.is_open()) {
