@@ -258,7 +258,7 @@ TreeKnot* balancedTree(int n) {
 }
 
 #pragma endregion
-
+#pragma region HomeWork 12
 /// <summary>
 /// Рекурсивный поиск значения в дереве
 /// </summary>
@@ -274,7 +274,6 @@ boolean binSearch(TreeKnot* root, int key) {
 	else return binSearch(root->left, key);
 	//будем так ходить до NULL или до положительного результата
 }
-
 
 /// <summary>
 /// считаем все узлы до предпоследнего уровня включительно
@@ -310,7 +309,7 @@ boolean isBalancedTree(TreeKnot* root) {
 /// </summary>
 /// <param name="p">Ссылка на корень</param>
 /// <returns>Размер элементов за корнем</returns>
-int getsize(TreeKnot* p) 
+int getsize(TreeKnot* p)
 {
 	if (!p) return 0;
 	return p->size;
@@ -375,6 +374,51 @@ double isBalancedOfFiftyTree(TreeKnot* arr) {
 	return (double)countBalance * 100 / fiftytree;
 	/*В ходе многочисленных экскрементов было установлено что при количестве узлов 10 процент сбалансированных - 12%*/
 }
+#pragma endregion
+
+/// <summary>
+/// Построение дерева в массиве
+/// </summary>
+/// <param name="arr">Указатель на массив</param>
+/// <param name="newIndex">Индекс добавляемого элемента</param>
+/// <param name="size">Размер массива</param>
+void buildTree(int* arr, int newIndex, int size) {
+	int maxIndex = newIndex; //Индекс максимального элемента из сравниваемых родителя и потомков
+	int newElement = arr[newIndex]; //Значение добавляемого элемента
+	while (true) {
+		int child = newIndex * 2 + 1; //Левый потомок
+		//Если рассчитанный потомок не уходит за пределы массива сравниваем его с родителем
+		if ((child < size) && (arr[child] > newElement))
+			maxIndex = child;
+		child = newIndex * 2 + 2; //Правый потомок
+		if ((child < size) && (arr[child] > arr[maxIndex]))
+			maxIndex = child;
+		if (maxIndex == newIndex) break; // если мы и были максимумом то выходим...
+		arr[newIndex] = arr[maxIndex];
+		arr[maxIndex] = newElement;
+		newIndex = maxIndex;
+	}
+}
+
+/// <summary>
+/// Пузырьковая сортировка
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void heapSort(int* arr, int size) { 
+	//Берем половину массива т.к. попадем четко в последний узел с листами и уже их будем сравнивать
+	for (int i = size / 2 - 1; i >= 0; --i)
+		buildTree(arr, i, size); //За один раз поставит нужный элемент в нужное место, по этому надо вызывать столько раз сколько элементов мы будем добавлять, т.е. половину массива
+	//Пока в дереве не останется один элемент будем менять местами нулевой и последний элемент
+	//Оставшийся "узел" будет минимальный элементом массива 
+	while (size > 1) {
+		--size;
+		int firstElem = arr[0];
+		arr[0] = arr[size];
+		arr[size] = firstElem;
+		buildTree(arr, 0, size); //Корень дерева в качестве добавляемого элемента, т.е. теперь сверху вниз будет спуск
+	}
+}
 
 int main()
 {
@@ -418,6 +462,17 @@ int main()
 	balanceTree = balancedTree(count);
 	file.close();
 	printTree(balanceTree);
+	std::cout << std::endl;
+
+	int arr[countKnot];
+	for (int i = 0; i < countKnot; i++)
+		arr[i] = rand() % 50 + 1;
+	for (int i = 0; i < countKnot; i++)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+	heapSort(arr, countKnot);
+	for (int i = 0; i < countKnot; i++)
+		std::cout << arr[i] << " ";
 	std::cout << std::endl;
 #pragma endregion
 
