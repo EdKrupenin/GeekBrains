@@ -1,7 +1,5 @@
 ﻿#include <iostream>
 #include <fstream>
-#include <iterator>
-#include <list>
 
 #define true 1 == 1
 #define false 1 != 1
@@ -260,7 +258,51 @@ TreeKnot* balancedTree(int n) {
 	return newKnot;
 }
 
+/// <summary>
+/// Построение дерева в массиве
+/// </summary>
+/// <param name="arr">Указатель на массив</param>
+/// <param name="newIndex">Индекс добавляемого элемента</param>
+/// <param name="size">Размер массива</param>
+void buildTree(int* arr, int newIndex, int size) {
+	int maxIndex = newIndex; //Индекс максимального элемента из сравниваемых родителя и потомков
+	int newElement = arr[newIndex]; //Значение добавляемого элемента
+	while (true) {
+		int child = newIndex * 2 + 1; //Левый потомок
+		//Если рассчитанный потомок не уходит за пределы массива сравниваем его с родителем
+		if ((child < size) && (arr[child] > newElement))
+			maxIndex = child;
+		child = newIndex * 2 + 2; //Правый потомок
+		if ((child < size) && (arr[child] > arr[maxIndex]))
+			maxIndex = child;
+		if (maxIndex == newIndex) break; // если мы и были максимумом то выходим...
+		arr[newIndex] = arr[maxIndex];
+		arr[maxIndex] = newElement;
+		newIndex = maxIndex;
+	}
+}
+
+/// <summary>
+/// Пузырьковая сортировка
+/// </summary>
+/// <param name="arr"></param>
+/// <param name="size"></param>
+void heapSort(int* arr, int size) {
+	//Берем половину массива т.к. попадем четко в последний узел с листами и уже их будем сравнивать
+	for (int i = size / 2 - 1; i >= 0; --i)
+		buildTree(arr, i, size); //За один раз поставит нужный элемент в нужное место, по этому надо вызывать столько раз сколько элементов мы будем добавлять, т.е. половину массива
+	//Пока в дереве не останется один элемент будем менять местами нулевой и последний элемент
+	//Оставшийся "узел" будет минимальный элементом массива 
+	while (size > 1) {
+		--size;
+		int firstElem = arr[0];
+		arr[0] = arr[size];
+		arr[size] = firstElem;
+		buildTree(arr, 0, size); //Корень дерева в качестве добавляемого элемента, т.е. теперь сверху вниз будет спуск
+	}
+}
 #pragma endregion
+
 #pragma region HomeWork 12
 /// <summary>
 /// Рекурсивный поиск значения в дереве
@@ -279,26 +321,105 @@ boolean binSearch(TreeKnot* root, int key) {
 }
 
 /// <summary>
-/// Пузырьковая сортировка
+/// считаем все узлы до предпоследнего уровня включительно
 /// </summary>
-/// <param name="arr"></param>
-/// <param name="size"></param>
-void heapSort(int* arr, int size) { 
-	//Берем половину массива т.к. попадем четко в последний узел с листами и уже их будем сравнивать
-	for (int i = size / 2 - 1; i >= 0; --i)
-		buildTree(arr, i, size); //За один раз поставит нужный элемент в нужное место, по этому надо вызывать столько раз сколько элементов мы будем добавлять, т.е. половину массива
-	//Пока в дереве не останется один элемент будем менять местами нулевой и последний элемент
-	//Оставшийся "узел" будет минимальный элементом массива 
-	while (size > 1) {
-		--size;
-		int firstElem = arr[0];
-		arr[0] = arr[size];
-		arr[size] = firstElem;
-		buildTree(arr, 0, size); //Корень дерева в качестве добавляемого элемента, т.е. теперь сверху вниз будет спуск
+/// <param name="root">Ссылка на корень дерева</param>
+/// <param name="count">Ссылка на int счетчик</param>
+void countKnots(TreeKnot* root, int& count) {
+	//Если есть корень и у него есть хотя бы 1 наследник считаем его
+	if (root != NULL && (root->left != NULL || root->right != NULL)) {
+		countKnots(root->left, count);
+		count++;
+		countKnots(root->right, count);
 	}
 }
 
+/// <summary>
+/// Проверка сбалансировано дерево или нет
+/// </summary>
+/// <param name="root"></param>
+/// <returns>Ответ да ил нет</returns>
+boolean isBalancedTree(TreeKnot* root) {
+	int countL = 0;
+	int countR = 0;
+	countKnots(root->left, countL);
+	countKnots(root->right, countR);
+	//Если кол-во узлов удовлетворяет условию баланса
+	if (countL == countR || countL - 1 == countR) return true;
+	else return false;
+}
 
+/// <summary>
+/// обертка для поля size, работает с пустыми деревьями (t=NULL)
+/// </summary>
+/// <param name="p">Ссылка на корень</param>
+/// <returns>Размер элементов за корнем</returns>
+int getsize(TreeKnot* p)
+{
+	if (!p) return 0;
+	return p->size;
+}
+
+/// <summary>
+/// установление корректного размера дерева
+/// </summary>
+/// <returns>Возвращает размер дерева</returns>
+void fixsize(TreeKnot* p)
+{
+	p->size = getsize(p->left) + getsize(p->right) + 1;
+}
+
+/// <summary>
+/// Считаем кол-во узлов в дереве
+/// </summary>
+/// <param name="root"></param>
+/// <param name="count"></param>
+void CountKnot(TreeKnot* root, int& count) {
+	if (root != NULL) {
+		CountKnot(root->left, count);
+		count++;
+		CountKnot(root->right, count);
+	}
+}
+
+/// <summary>
+/// Функция вставки в дерево, с подсчетом его размера
+/// </summary>
+/// <returns></returns>
+TreeKnot* ins(TreeKnot* root, int key)
+{
+	if (root == NULL)
+		return new TreeKnot{ key,1,NULL,NULL };
+	if (key < root->key)
+		root->left = ins(root->left, key);
+	else
+		root->right = ins(root->right, key);
+	fixsize(root);
+	return root;
+}
+
+/// <summary>
+/// Подсчитывает процент сбалансированных деревьев
+/// </summary>
+/// <param name="arr"></param>
+/// <returns></returns>
+double isBalancedOfFiftyTree(TreeKnot* arr) {
+	int countBalance = 0;
+	for (size_t i = 0; i < 50; i++)
+	{
+		TreeKnot* currentTree = new TreeKnot{ rand(),1,NULL,NULL };
+		for (size_t i = 0; i < countKnot; i++)
+		{
+			currentTree = ins(currentTree, rand());
+		}
+		arr[i] = *currentTree;
+		if (isBalancedTree(currentTree)) countBalance++;
+		/*std::cout << "Is balanced " << i << " tree ?" << (isBalancedTree(currentTree) ? "True" : "False") << std::endl;*/
+	}
+	return (double)countBalance * 100 / fiftytree;
+	/*В ходе многочисленных экскрементов было установлено что при количестве узлов 10 процент сбалансированных - 12%*/
+}
+#pragma endregion
 
 int main()
 {
@@ -317,7 +438,6 @@ int main()
 	std::cout << "8 in Tree = " << (binSearch(tree, 8) ? "True" : "False") << std::endl;
 	std::cout << "100 in Tree = " << (binSearch(tree, 100) ? "True" : "False") << std::endl;
 	int countTree = 0;
-	countKnot(tree, countTree);
 	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 
 	deleteKnot(tree, 5); //листовой
@@ -349,6 +469,9 @@ int main()
 	file.close();
 	printTree(balanceTree);
 	std::cout << std::endl;
+
+	TreeKnot fiftyTree[fiftytree];
+	std::cout << "Percent is balanced Tree = " << isBalancedOfFiftyTree(fiftyTree);
 
 	int arr[countKnot];
 	for (int i = 0; i < countKnot; i++)
