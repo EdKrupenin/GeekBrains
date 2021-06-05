@@ -140,12 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lesson 12-13.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="lesson 12-13.h" />
+    <ClCompile Include="Resource\Lesson9-10.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="balance.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource\Lesson9-10.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

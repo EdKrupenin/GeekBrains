@@ -18,13 +18,16 @@
     <ClCompile Include="lesson 12-13.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="lesson 12-13.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
+    <ClCompile Include="Resource\Lesson9-10.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="balance.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource\Lesson9-10.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

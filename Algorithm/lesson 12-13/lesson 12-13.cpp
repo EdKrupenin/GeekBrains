@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <fstream>
+#include "Resource/Lesson9-10.h"
 
 #define true 1 == 1
 #define false 1 != 1
@@ -7,7 +8,7 @@ typedef int boolean;
 const int fiftytree = 50;
 const int countKnot = 10;
 std::ifstream file;
-
+/*
 #pragma region Бинарное дерево
 
 /// <summary>
@@ -18,11 +19,10 @@ typedef struct Knot {
 	int size;
 	struct Knot* left;
 	struct Knot* right;
-	//Knot(int k) { key = k; left = right = 0; size = 1; }
 } TreeKnot;
 
 /// <summary>
-/// 
+///
 /// </summary>
 /// <param name="t">Дерево в которое необходимо вставить новый элемент</param>
 /// <param name="data">Значение ключа нового элемента</param>
@@ -88,7 +88,7 @@ void printTree(TreeKnot* root)
 TreeKnot* getSeccesor(TreeKnot* knot) {
 	TreeKnot* current = knot->right;   //Некий наилучший на данный момет элемент (самый подходящий)
 	TreeKnot* parent = knot;           //Родительский текущий узел, что бы перезаписать родителю наследника
-	TreeKnot* s = knot;				   //Текущий узел 
+	TreeKnot* s = knot;				   //Текущий узел
 	while (current != NULL) {
 		//Пройдем до упора по левой ветке дерева
 		parent = s;
@@ -207,7 +207,7 @@ void preOrderTravels(TreeKnot* root) {
 			2     5     7      null
 		   / \   / \   / \    /  \
 		  3   4  6  7 10 11  null  null
-	*/
+	/
 }
 
 /// <summary>
@@ -251,7 +251,7 @@ TreeKnot* balancedTree(int n) {
 	else { //Заполняем данными дерево и
 		   //посчитать корнем насколько большого дерева станет данный узел
 		file >> x;
-		nL = n / 2;		//Слева будет на один элемент больше т.к. 
+		nL = n / 2;		//Слева будет на один элемент больше т.к.
 		nR = n - nL - 1; //мы уже работаем с одним узлом из множества n
 		newKnot = new TreeKnot{ x,1, balancedTree(nL), balancedTree(nR) };
 	}
@@ -292,7 +292,7 @@ void heapSort(int* arr, int size) {
 	for (int i = size / 2 - 1; i >= 0; --i)
 		buildTree(arr, i, size); //За один раз поставит нужный элемент в нужное место, по этому надо вызывать столько раз сколько элементов мы будем добавлять, т.е. половину массива
 	//Пока в дереве не останется один элемент будем менять местами нулевой и последний элемент
-	//Оставшийся "узел" будет минимальный элементом массива 
+	//Оставшийся "узел" будет минимальный элементом массива
 	while (size > 1) {
 		--size;
 		int firstElem = arr[0];
@@ -414,75 +414,229 @@ double isBalancedOfFiftyTree(TreeKnot* arr) {
 		}
 		arr[i] = *currentTree;
 		if (isBalancedTree(currentTree)) countBalance++;
-		/*std::cout << "Is balanced " << i << " tree ?" << (isBalancedTree(currentTree) ? "True" : "False") << std::endl;*/
+		/*std::cout << "Is balanced " << i << " tree ?" << (isBalancedTree(currentTree) ? "True" : "False") << std::endl;/
 	}
 	return (double)countBalance * 100 / fiftytree;
-	/*В ходе многочисленных экскрементов было установлено что при количестве узлов 10 процент сбалансированных - 12%*/
+	/*В ходе многочисленных экскрементов было установлено что при количестве узлов 10 процент сбалансированных - 12%/
 }
+#pragma endregion
+
+*/
+
+const int n = 6; //Количество вершин графа...
+//Матрица смежности
+int matrix[n][n] = {
+	//   a,b,c,d,e,f
+		{0,1,1,0,0,0}, //a
+		{0,0,0,1,1,1}, //b
+		{0,0,0,0,0,1}, //c
+		{1,0,0,0,0,0}, //d
+		{0,0,0,0,0,0}, //e
+		{0,0,0,0,1,0}, //f
+};
+//Массив посещенных вершин
+int visited[n] = { 0 };
+
+void print2dmatrix(int** array, int row, int col) {
+	for (size_t i = 0; i < row; i++)
+	{	
+		std::cout << char(0x61 + i)<<" ";
+		for (size_t j = 0; j < col; j++)
+		{
+			std::cout << array[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+#pragma region Обход в глубину
+/// <summary>
+/// переходы на глубину
+/// </summary>
+/// <param name="st"></param>
+void depthTravers(int st) {
+	int guidingStar;
+	std::cout << "You were here - " << char(0x61 + st) << " ";
+	visited[st] = 1;
+	//Проверяем связи "ребра" с другими вершинами
+	for (guidingStar = 0; guidingStar < n; guidingStar++) {
+		if (matrix[st][guidingStar] && visited[guidingStar] != 1)
+			depthTravers(guidingStar);
+	}
+}
+
+/// <summary>
+/// Проход в глубину c использованием Stack
+/// </summary>
+/// <param name="matrix">Матрица смежности</param>
+/// <param name="start">Точка старта</param>
+/// <param name="size">Количество вершин графа (размер матрицы)</param>
+void depthTraversStack(int** matrix, int start, const int size) {
+	//Создаем и инициализируем стэк
+	ListStack* stackTravers = new ListStack;
+	init(stackTravers);
+	//Создаем и обнуляем массив посещений
+	int* visiteD = new int[size];
+	init1dArrayNull(visiteD, size);
+	//Записываем в очередь стартовую точку
+	push(stackTravers, start);
+	while (stackTravers->size > 0) {
+		int index = pop(stackTravers);
+		if (visiteD[index] == 1) continue;
+		visiteD[index] = 1;
+		std::cout << "You were here - " << char(0x61 + index) << " ";
+		//Смотрим куда можно пойти из вершины index
+		for (size_t i = 0; i < size; i++)
+		{
+			//Забираем значение массива в строке index в колонке i
+			if (get2dInt(matrix, index, i) == 1 && visiteD[i] == 0)
+			{
+				push(stackTravers, i);
+			}
+			//Если там 1 (значит есть связь и мы там не были то welcome
+		}
+		//int index = pop(stackTravers);
+	}
+	//Закончиться когда все вершины будут посещены
+	delete[] visiteD;
+}
+#pragma endregion
+
+#pragma region Обход в ширину
+/// <summary>
+/// Обход в ширину на основе очереди и цикла while
+/// </summary>
+/// <param name="matrix">Матрица смежности</param>
+/// <param name="start">Точка старта</param>
+/// <param name="size">Количество вершин графа (размер матрицы)</param>
+void widthTravers(int** matrix, int start, const int size) {
+	//Создаем и инициализируем очередь
+	QueueList* queueTravers = new QueueList;
+	init(queueTravers);
+	//Создаем и обнуляем массив посещений
+	int* visiteD = new int[size];
+	init1dArrayNull(visiteD, size);
+	//Записываем в очередь стартовую точку
+	enqueue(queueTravers, start);
+	while (queueTravers->size > 0) {
+		int index = dequeue(queueTravers);
+		if (visiteD[index] == 1) continue;
+		visiteD[index] = 1;
+		std::cout << "You were here - " << char(0x61 + index) << " ";
+		for (size_t i = 0; i < size; i++)
+		{
+			//Забираем значение массива в строке index в колонке i
+			if (get2dInt(matrix, index, i) == 1 && visiteD[i] == 0)
+				//Если там 1 (значит есть связь и мы там не были то welcome
+				enqueue(queueTravers, i);
+		}
+	}
+	//Закончиться когда все вершины будут посещены
+	delete[] visiteD;
+}
+#pragma endregion
+
+#pragma region Поиск кратчайшего пути в графе
+
 #pragma endregion
 
 int main()
 {
-#pragma region Бинарное дерево
-	//Выделять память не нужно, но нужно зафиксировать корень дерева
-	TreeKnot* tree = new TreeKnot{ 10, NULL, NULL };
-	treeInstrt(tree, 10);
-	treeInstrt(tree, 8);
-	treeInstrt(tree, 19);
-	treeInstrt(tree, 5);
-	treeInstrt(tree, 9);
-	treeInstrt(tree, 16);
-	treeInstrt(tree, 21);
-	printTree(tree);
-	std::cout << std::endl;
-	std::cout << "8 in Tree = " << (binSearch(tree, 8) ? "True" : "False") << std::endl;
-	std::cout << "100 in Tree = " << (binSearch(tree, 100) ? "True" : "False") << std::endl;
-	int countTree = 0;
-	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
+	/*
+	#pragma region Бинарное дерево
+		//Выделять память не нужно, но нужно зафиксировать корень дерева
+		TreeKnot* tree = new TreeKnot{ 10, NULL, NULL };
+		treeInstrt(tree, 10);
+		treeInstrt(tree, 8);
+		treeInstrt(tree, 19);
+		treeInstrt(tree, 5);
+		treeInstrt(tree, 9);
+		treeInstrt(tree, 16);
+		treeInstrt(tree, 21);
+		printTree(tree);
+		std::cout << std::endl;
+		std::cout << "8 in Tree = " << (binSearch(tree, 8) ? "True" : "False") << std::endl;
+		std::cout << "100 in Tree = " << (binSearch(tree, 100) ? "True" : "False") << std::endl;
+		int countTree = 0;
+		std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
 
-	deleteKnot(tree, 5); //листовой
-	printTree(tree);
+		deleteKnot(tree, 5); //листовой
+		printTree(tree);
+		std::cout << std::endl;
+		std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
+		deleteKnot(tree, 19); //два наследника
+		printTree(tree);
+		std::cout << std::endl;
+		std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
+		deleteKnot(tree, 8); //один наследник с ключом 9
+		printTree(tree);
+		std::cout << std::endl;
+		std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
+		preOrderTravels(tree);
+		std::cout << std::endl;
+		inOrderTravels(tree);
+		std::cout << std::endl;
+		postOrderTravals(tree);
+		std::cout << std::endl;
+		TreeKnot* balanceTree = NULL;
+		file.open("balance.txt");
+		if (!file.is_open()) {
+			std::cout << "Can't open file!!!" << std::endl;
+			return 1;
+		}
+		const int count = 15; //Количество элементов в файле
+		balanceTree = balancedTree(count);
+		file.close();
+		printTree(balanceTree);
+		std::cout << std::endl;
+
+		TreeKnot fiftyTree[fiftytree];
+		std::cout << "Percent is balanced Tree = " << isBalancedOfFiftyTree(fiftyTree);
+
+		int arr[countKnot];
+		for (int i = 0; i < countKnot; i++)
+			arr[i] = rand() % 50 + 1;
+		for (int i = 0; i < countKnot; i++)
+			std::cout << arr[i] << " ";
+		std::cout << std::endl;
+		heapSort(arr, countKnot);
+		for (int i = 0; i < countKnot; i++)
+			std::cout << arr[i] << " ";
+		std::cout << std::endl;
+	#pragma endregion
+	*/
+	depthTravers(0);
+	init1dArrayNull(visited, n);
 	std::cout << std::endl;
-	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
-	deleteKnot(tree, 19); //два наследника
-	printTree(tree);
+	depthTravers(2);
+	init1dArrayNull(visited, n);
 	std::cout << std::endl;
-	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
-	deleteKnot(tree, 8); //один наследник с ключом 9
-	printTree(tree);
+	depthTravers(1);
+	init1dArrayNull(visited, n);
 	std::cout << std::endl;
-	std::cout << "Is Tree balanced ? " << (isBalancedTree(tree) ? "True" : "False") << std::endl;
-	preOrderTravels(tree);
+	int** trevers = init2Array(n, n);
+	std::cout << "  a b c d e f" << std::endl;
+	setLineValues(trevers, n, n, n * n,
+		0, 1, 1, 0, 0, 0, //a
+		0, 0, 0, 1, 1, 1, //b
+		0, 0, 0, 0, 0, 1, //c
+		1, 0, 0, 0, 0, 0, //d
+		0, 0, 0, 0, 0, 0, //e
+		0, 0, 0, 0, 1, 0);//f
+	print2dmatrix(trevers, n, n);
+	widthTravers(trevers, 0, n);
 	std::cout << std::endl;
-	inOrderTravels(tree);
+	widthTravers(trevers, 2, n);
 	std::cout << std::endl;
-	postOrderTravals(tree);
+	widthTravers(trevers, 1, n);
 	std::cout << std::endl;
-	TreeKnot* balanceTree = NULL;
-	file.open("balance.txt");
-	if (!file.is_open()) {
-		std::cout << "Can't open file!!!" << std::endl;
-		return 1;
-	}
-	const int count = 15; //Количество элементов в файле
-	balanceTree = balancedTree(count);
-	file.close();
-	printTree(balanceTree);
+	std::cout << std::endl;
+	depthTraversStack(trevers, 0, n);
+	std::cout << std::endl;
+	depthTraversStack(trevers, 2, n);
+	std::cout << std::endl;
+	depthTraversStack(trevers, 1, n);
 	std::cout << std::endl;
 
-	TreeKnot fiftyTree[fiftytree];
-	std::cout << "Percent is balanced Tree = " << isBalancedOfFiftyTree(fiftyTree);
-
-	int arr[countKnot];
-	for (int i = 0; i < countKnot; i++)
-		arr[i] = rand() % 50 + 1;
-	for (int i = 0; i < countKnot; i++)
-		std::cout << arr[i] << " ";
-	std::cout << std::endl;
-	heapSort(arr, countKnot);
-	for (int i = 0; i < countKnot; i++)
-		std::cout << arr[i] << " ";
-	std::cout << std::endl;
-#pragma endregion
 	return 0;
 }
