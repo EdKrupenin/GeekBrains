@@ -813,6 +813,46 @@ void setLineValues(int** matrix, int cols, int row, int leghtAgrs, ...) {
 	__crt_va_end(args);
 }
 
+int get2dInt(int** matrix, int row, int col) {
+	return *((*(matrix + row)) + col);
+}
+
+void set2dInt(int** matrix, int row, int col, int num) {
+	*((*(matrix + row)) + col) = num;
+}
+
+void init1dArrayNull(int* arr, int size) {
+	for (size_t i = 0; i < size; i++)
+	{
+		arr[i] = 0;
+	}
+}
+
+void init2dArrayNum(int** arr, int row, int col, int num) {
+	for (size_t i = 0; i < row; i++) {
+		for (size_t j = 0; j < col; j++)
+			arr[i][j] = num;
+	}
+}
+
+void print2dmatrix(int** array, int row, int col) {
+	std::cout << "  ";
+	for (size_t i = 0; i < row; i++)
+	{
+		std::cout << char(0x61 + i) << " ";
+	}
+	std::cout << std::endl;
+	for (size_t i = 0; i < row; i++)
+	{
+		std::cout << char(0x61 + i) << " ";
+		for (size_t j = 0; j < col; j++)
+		{
+			std::cout << array[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
 void print2dArray(int** array, int row, int col) {
 	for (size_t i = 0; i < row; i++)
 	{
@@ -824,13 +864,10 @@ void print2dArray(int** array, int row, int col) {
 	}
 }
 
-int get2dInt(int** matrix, int row, int col) {
-	return *((*(matrix + row)) + col);
-}
-
-void init1dArrayNull(int* arr, int size) {
-	for (size_t i = 0; i < size; i++)
+void print1dArray(int* arr, int row) {
+	for (size_t j = 0; j < row; j++)
 	{
-		arr[i] = 0;
+		std::cout << arr[j] << " ";
 	}
+	std::cout << std::endl;
 }

@@ -158,8 +158,16 @@ void setLineValues(int** matrix, int cols, int row, int leghtAgrs, ...);
 
 void print2dArray(int** array, int row, int col);
 
+void print1dArray(int* arr, int row);
+
 int get2dInt(int** matrix, int row, int col);
 
+void set2dInt(int** matrix, int row, int col, int num);
+
 void init1dArrayNull(int* arr, int size);
+
+void init2dArrayNum(int** arr, int row, int col, int num);
+
+void print2dmatrix(int** array, int row, int col);
 
 #pragma endregion
