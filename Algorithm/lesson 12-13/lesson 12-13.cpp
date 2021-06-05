@@ -606,14 +606,38 @@ int lee(int** grid, int sx, int sy, int ex, int ey) {
 			if (nextX >= 0 && nextX < WIDTH &&
 				nextY >= 0 && nextY < HEIGTH &&
 				grid[nextY][nextX] == distance) {
-					y = nextY;
-					x = nextX;
+				y = nextY;
+				x = nextX;
 			}
 		}
 	}
 	return len;
 }
 
+#pragma endregion
+
+#pragma region Жадные алгоритмы
+int profit(int* deadline, int* task, const int TASKS, const int DAYS) {
+	int* used = new int[DAYS]; //"календарь" если 1 то день занят
+	int* arr = new int[DAYS]; //массив для вывода (стоимости)
+	init1dArrayNull(used, DAYS);
+	init1dArrayNull(arr, DAYS);
+
+	int sum = 0;
+	for (int i = 0; i < TASKS; i++)
+	{
+		int k = deadline[i]; //Текущий deadline
+		while (k >= 1 && used[k] == 1) {
+			k--; //если день занят то ищем место слева
+		}
+		if (k == 0) continue;
+		used[k] = 1;
+		arr[k] = task[i];
+		sum += task[i];
+	}
+	print1dArray(arr, DAYS);
+	return sum;
+}
 #pragma endregion
 
 int main()
@@ -731,5 +755,12 @@ int main()
 	std::cout << std::endl;
 	print1dArray(pointX, length);
 	print1dArray(pointY, length);
+	std::cout << std::endl;
+	std::cout << std::endl;
+	const int DMAX = 10; //Максимальный deadline
+	const int N = 12; //кол-во заказов
+	int task[] = { 1000,900,800,700,600,500,400,300,300,100,75,50 }; //price
+	int deadline[] = { 2,  8,  9,  3,  5,  4,  7,  2,  1,  6, 9, 10 };
+	std::cout << "profit = " << profit(deadline, task, N, DMAX) << std::endl;;
 	return 0;
 }
