@@ -435,6 +435,7 @@ int matrix[n][n] = {
 		{0,0,0,0,1,0}, //f
 };
 int visited[n] = { 0 }; //Массив посещенных вершин
+int refernce[n] = { 0 };
 
 #pragma region Обход в глубину
 /// <summary>
@@ -445,10 +446,13 @@ void depthTravers(int st) {
 	int guidingStar;
 	std::cout << "You were here - " << char(0x61 + st) << " ";
 	visited[st] = 1;
+	
 	//Проверяем связи "ребра" с другими вершинами
 	for (guidingStar = 0; guidingStar < n; guidingStar++) {
-		if (matrix[st][guidingStar] && visited[guidingStar] != 1)
+		if (matrix[st][guidingStar] && visited[guidingStar] != 1) {
 			depthTravers(guidingStar);
+		}
+			
 	}
 }
 
@@ -511,9 +515,12 @@ void widthTravers(int** matrix, int start, const int size) {
 		for (size_t i = 0; i < size; i++)
 		{
 			//Забираем значение массива в строке index в колонке i
-			if (get2dInt(matrix, index, i) == 1 && visiteD[i] == 0)
+			if (get2dInt(matrix, index, i) == 1 && visiteD[i] == 0){
 				//Если там 1 (значит есть связь и мы там не были то welcome
 				enqueue(queueTravers, i);
+			}
+			//считаем количество ссылок на смежные вершины
+			if (get2dInt(matrix, index, i) == 1) refernce[index] += 1;
 		}
 	}
 	//Закончиться когда все вершины будут посещены
@@ -640,6 +647,48 @@ int profit(int* deadline, int* task, const int TASKS, const int DAYS) {
 }
 #pragma endregion
 
+#pragma region Полустепень захода
+/// <summary>
+/// Подсчет полу степеней захода графа с использованием матрицы смежностей
+/// </summary>
+/// <param name="matrix">Матрица смежностей</param>
+/// <param name="ref">Массив со степенями</param>
+/// <param name="size">Размер матрицы смежностей</param>
+void step(int** matrix, int* ref, int size) {
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (matrix[i][j] == 1) ref[i] += 1;
+		}
+	}
+}
+
+/// <summary>
+/// Подсчет степеней вершин смежных со стартовой точкой
+/// </summary>
+/// <param name="matrix">Матрица смежностей</param>
+/// <param name="lst">Список смежных вершин</param>
+/// <param name="start">стартовая точка</param>
+/// <param name="size">размер матрицы</param>
+void listAdj(int** matrix, List* lst,int start, int size) {
+	int step = 0; //кол-во ссылок на смежную вершину
+	for (int i = 0; i < size; i++)
+	{
+		if (matrix[start][i] == 1) {
+			for (int j = 0; j < size; j++)
+			{
+				if (matrix[i][j] == 1) step++;
+			}
+			insertList(lst, step);
+			step = 0;
+		} 
+		
+	}
+}
+
+#pragma endregion
+
 int main()
 {
 	/*
@@ -716,27 +765,49 @@ int main()
 	std::cout << std::endl;
 	int** trevers = init2Array(n, n);
 	setLineValues(trevers, n, n, n * n,
-		0, 1, 1, 0, 0, 0, //a
-		0, 0, 0, 1, 1, 1, //b
-		0, 0, 0, 0, 0, 1, //c
-		1, 0, 0, 0, 0, 0, //d
-		0, 0, 0, 0, 0, 0, //e
-		0, 0, 0, 0, 1, 0);//f
+	  //a  b  c  d  e  f
+		1, 1, 1, 0, 0, 0, //a
+		0, 1, 0, 1, 1, 1, //b
+		0, 0, 1, 0, 0, 1, //c
+		1, 0, 0, 1, 0, 0, //d
+		0, 0, 0, 0, 1, 0, //e
+		0, 0, 0, 0, 1, 1);//f
 	print2dmatrix(trevers, n, n);
 	widthTravers(trevers, 0, n);
 	std::cout << std::endl;
 	widthTravers(trevers, 2, n);
 	std::cout << std::endl;
+	init1dArrayNull(refernce, n);
 	widthTravers(trevers, 1, n);
 	std::cout << std::endl;
 	std::cout << std::endl;
 	depthTraversStack(trevers, 0, n);
+	std::cout << std::endl;
+	std::cout << std::endl;
+	//print1dArray(refernce, n);
 	std::cout << std::endl;
 	depthTraversStack(trevers, 2, n);
 	std::cout << std::endl;
 	depthTraversStack(trevers, 1, n);
 	std::cout << std::endl;
 	std::cout << std::endl;
+	print1dArray(refernce, n);
+	std::cout << std::endl;
+
+
+	int* refer = new int[n];
+	init1dArrayNull(refer, n);
+	step(trevers, refer, n);
+	print1dArray(refer, n);
+
+	List* lst = new List;
+	init(lst);
+	listAdj(trevers, lst,0,n);
+	printList(lst);
+	std::cout << std::endl;
+	std::cout << std::endl; std::cout << std::endl;
+	std::cout << std::endl;
+
 
 	//Инициализируем поле и заполняем его бланками
 	int** area = init2Array(HEIGTH, WIDTH);

@@ -21,7 +21,7 @@ typedef struct List {
 	int size;
 }List;
 
-void initList(List* lst);
+void init(List* lst);
 
 void insertList(List* lst, int data);
 

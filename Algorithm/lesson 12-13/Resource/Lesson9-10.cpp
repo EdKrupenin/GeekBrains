@@ -254,7 +254,7 @@ void printQueue() {
 /// Инициализация нового списка
 /// </summary>
 /// <param name="lst">Указатель на список</param>
-void initList(List* lst) {
+void init(List* lst) {
 	lst->head = NULL;
 	lst->size = 0;
 }
@@ -315,7 +315,7 @@ Knot* rm(List* lst, int data) {
 /// <returns>Скопированный список</returns>
 List* copyList(List* lst) {
 	List* newLst = new List; //создаем новый лист который пойдет на выход...
-	initList(newLst);
+	init(newLst);
 	Knot* current = lst->head; //получаем первый элемент старого списка и проверяем его на NULL...
 	if (current == NULL) return NULL;
 	//Проходим по каждому элементу старого списка, забираем оттуда значение и передаем в функцию
