@@ -250,23 +250,16 @@ void printQueue() {
 
 
 #pragma region Односвязные списки
-/// <summary>
-/// Инициализация нового списка
-/// </summary>
-/// <param name="lst">Указатель на список</param>
+
 void init(List* lst) {
 	lst->head = NULL;
 	lst->size = 0;
 }
 
-/// <summary>
-/// Добавление нового элемента
-/// </summary>
-/// <param name="lst">Указатель на список</param>
-/// <param name="data">Новый элемент</param>
-void insertList(List* lst, int data) {
+void insertList(List* lst, int data, char name) {
 	Knot* newKnot = new Knot;
 	newKnot->date = data;
+	newKnot->name = name;
 	newKnot->next = NULL;
 
 	Knot* current = lst->head;
@@ -283,12 +276,6 @@ void insertList(List* lst, int data) {
 	}
 }
 
-/// <summary>
-/// Удаление элементов из связного списка
-/// </summary>
-/// <param name="lst">ссылка на головной элемент и кол-во</param>
-/// <param name="data">данные которые надо удалить</param>
-/// <returns>данные которые надо удалить</returns>
 Knot* rm(List* lst, int data) {
 	Knot* current = lst->head;
 	Knot* parent = NULL;
@@ -308,11 +295,6 @@ Knot* rm(List* lst, int data) {
 	return current;
 }
 
-/// <summary>
-/// Функция копирования односвязного листа
-/// </summary>
-/// <param name="Lst">Указатель на список который надо скопировать</param>
-/// <returns>Скопированный список</returns>
 List* copyList(List* lst) {
 	List* newLst = new List; //создаем новый лист который пойдет на выход...
 	init(newLst);
@@ -322,17 +304,12 @@ List* copyList(List* lst) {
 	//вставки, так же передаем туда ссылку на новый список, это гарантирует что все новые элементы
 	//будет независимы
 	while (current->next != NULL) {
-		insertList(newLst, current->date);
+		insertList(newLst, current->date,current->name);
 		current = current->next;
 	}
 	return newLst;
 }
 
-/// <summary>
-/// Функция проверки отсортирован ли односвязный список
-/// </summary>
-/// <param name="lst">Указатель на список</param>
-/// <returns>Результат проверки</returns>
 bool sortList(List* lst) {
 	Knot* current = lst->head; //получаем первый элемент старого списка и проверяем его на NULL...
 	if (current == NULL) return NULL;
@@ -359,7 +336,7 @@ void printKnot(Knot* k) {
 		std::cout << "[]";
 		return;
 	}
-	std::cout << '[' << k->date << ']';
+	std::cout << '[' <<k->name<<'-'<< k->date << ']';
 }
 
 void printList(List* lst) {
@@ -870,4 +847,42 @@ void print1dArray(int* arr, int row) {
 		std::cout << arr[j] << " ";
 	}
 	std::cout << std::endl;
+}
+
+void quickSort(int* data, int const len)
+{
+	int const lenD = len;
+	int pivot = 0;
+	int ind = lenD / 2;
+	int i, j = 0, k = 0;
+	if (lenD > 1) {
+		int* L = new int[lenD];
+		int* R = new int[lenD];
+		pivot = data[ind];
+		for (i = 0; i < lenD; i++) {
+			if (i != ind) {
+				if (data[i] < pivot) {
+					L[j] = data[i];
+					j++;
+				}
+				else {
+					R[k] = data[i];
+					k++;
+				}
+			}
+		}
+		quickSort(L, j);
+		quickSort(R, k);
+		for (int cnt = 0; cnt < lenD; cnt++) {
+			if (cnt < j) {
+				data[cnt] = L[cnt];;
+			}
+			else if (cnt == j) {
+				data[cnt] = pivot;
+			}
+			else {
+				data[cnt] = R[cnt - (j + 1)];
+			}
+		}
+	}
 }

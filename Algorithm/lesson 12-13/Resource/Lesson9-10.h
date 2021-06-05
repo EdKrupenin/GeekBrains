@@ -10,6 +10,7 @@ typedef int boolean;
 /// </summary>
 typedef struct Knot {
 	int date;
+	char name;
 	struct Knot* next;
 }Knot;
 
@@ -21,14 +22,39 @@ typedef struct List {
 	int size;
 }List;
 
+/// <summary>
+/// Инициализация нового списка
+/// </summary>
+/// <param name="lst">Указатель на список</param>
 void init(List* lst);
 
-void insertList(List* lst, int data);
+/// <summary>
+/// Добавление нового элемента
+/// </summary>
+/// <param name="lst">Указатель на список</param>
+/// <param name="data">Новый элемент</param>
+void insertList(List* lst, int data, char name);
 
+/// <summary>
+/// Удаление элементов из связного списка
+/// </summary>
+/// <param name="lst">ссылка на головной элемент и кол-во</param>
+/// <param name="data">данные которые надо удалить</param>
+/// <returns>данные которые надо удалить</returns>
 Knot* rm(List* lst, int data);
 
+/// <summary>
+/// Функция копирования односвязного листа
+/// </summary>
+/// <param name="Lst">Указатель на список который надо скопировать</param>
+/// <returns>Скопированный список</returns>
 List* copyList(List* lst);
 
+/// <summary>
+/// Функция проверки отсортирован ли односвязный список
+/// </summary>
+/// <param name="lst">Указатель на список</param>
+/// <returns>Результат проверки</returns>
 bool sortList(List* lst);
 
 void printKnot(Knot* k);
@@ -160,6 +186,8 @@ void print2dArray(int** array, int row, int col);
 
 void print1dArray(int* arr, int row);
 
+void quickSort(int* data, int const len);
+
 int get2dInt(int** matrix, int row, int col);
 
 void set2dInt(int** matrix, int row, int col, int num);
@@ -170,4 +198,5 @@ void init2dArrayNum(int** arr, int row, int col, int num);
 
 void print2dmatrix(int** array, int row, int col);
 
+void insertionSort(int data[], int lenD);
 #pragma endregion

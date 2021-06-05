@@ -662,6 +662,7 @@ void step(int** matrix, int* ref, int size) {
 			if (matrix[i][j] == 1) ref[i] += 1;
 		}
 	}
+	//bucketSort(ref, n);
 }
 
 /// <summary>
@@ -680,11 +681,12 @@ void listAdj(int** matrix, List* lst,int start, int size) {
 			{
 				if (matrix[i][j] == 1) step++;
 			}
-			insertList(lst, step);
+			insertList(lst, step, char(0x61 + i));
 			step = 0;
 		} 
 		
 	}
+	sortList(lst);
 }
 
 #pragma endregion
@@ -766,7 +768,7 @@ int main()
 	int** trevers = init2Array(n, n);
 	setLineValues(trevers, n, n, n * n,
 	  //a  b  c  d  e  f
-		1, 1, 1, 0, 0, 0, //a
+		1, 1, 1, 0, 0, 1, //a
 		0, 1, 0, 1, 1, 1, //b
 		0, 0, 1, 0, 0, 1, //c
 		1, 0, 0, 1, 0, 0, //d
@@ -798,6 +800,9 @@ int main()
 	int* refer = new int[n];
 	init1dArrayNull(refer, n);
 	step(trevers, refer, n);
+	print1dArray(refer, n);
+	std::cout << std::endl;
+	quickSort(refer,n);
 	print1dArray(refer, n);
 
 	List* lst = new List;
