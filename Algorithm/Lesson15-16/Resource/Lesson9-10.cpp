@@ -886,3 +886,8 @@ void quickSort(int* data, int const len)
 		}
 	}
 }
+
+void fillIntRandom(int* array, int size, int border) {
+	for (int i = 0; i < size; ++i)
+		*(array + i) = rand() % border;
+}

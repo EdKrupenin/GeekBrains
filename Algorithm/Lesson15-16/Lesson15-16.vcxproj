@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lesson15-16.cpp" />
+    <ClCompile Include="Resource\Lesson9-10.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource\Lesson9-10.h" />

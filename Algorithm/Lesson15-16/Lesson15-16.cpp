@@ -57,11 +57,13 @@ boolean insertNode(Knot** table, K data) {
 		std::cout << "Out of memory\n";
 		return false;
 	}
+	if (table[bucket] == NULL) table[bucket]->next == NULL;
 	//Указатель на текущую голову списка
 	p0 = table[bucket];
 	table[bucket] = p; //Запишем новую голову
 	p->next = p0;      //Припишем хвост новой голову
 	p->date = data;	   // Запишем данные в новую голову
+	p->name = char(data);
 	return true;
 }
 
@@ -118,15 +120,16 @@ void deleteKnot(Knot** table, K data) {
 /// <param name="table">Ссылка на массив</param>
 /// <param name="size">Размер таблицы</param>
 void printTable(Knot** table, int size) {
-	Knot* p;
+	Knot* current = NULL;
 	//Перебираем весь массив со списками
 	for (int i = 0; i < size; i++)
 	{
-		p = table[i]; //берем подряд каждый список
-		while (p) //Пока не дойдем до конца списка
+		current = table[i]; //берем подряд каждый список
+		while (current != NULL) //Пока не дойдем до конца списка
 		{
-			std::cout << p->date << " ";
-			p = p->next;
+			std::cout << current->date << " ";
+			current = current->next;
+			current->date ? current : NULL;
 		}
 		std::cout << std::endl;
 	}
@@ -148,11 +151,11 @@ int minimalCoin(int* denomination, int countCoin, int sum) {
 	{
 		// Пока можем добавляем номинал, как только ушли за пределы суммы
 		// переходим к следующему номиналу
-		while ((countSum+denomination[i]) <= sum)
+		while ((countSum + denomination[i]) <= sum)
 		{
 			countSum += denomination[i];
 			count++;
-		} 
+		}
 		//Если набрали то что надо выходим
 		if (countSum == sum) return count;
 	}
@@ -162,10 +165,20 @@ int minimalCoin(int* denomination, int countCoin, int sum) {
 int main()
 {
 	htSize = 8;
-	int* arr;
+	const int SZ = 20; //Размер массива
+	int* arr = new int[SZ];
+	fillIntRandom(arr, SZ, 100);
+	Knot** hashTable = new Knot * [htSize];
+	
+	for (size_t i = 0; i < SZ; i++)
+	{
+		insertNode(hashTable, arr[i]);
+	}
+	printKnot(findKnot(hashTable, 41));
+	printTable(hashTable, htSize);
 
 	std::string words = "abc";
-	std::cout << "hash String = " << hashString(words,1) << std::endl;
+	std::cout << "hash String = " << hashString(words, 1) << std::endl;
 	const int MAX = 98; //Максимальное значение
 	int denomination[] = { 50, 10, 5, 2, 1 }; //номинал монет
 	std::cout << "minimal Coin = " << minimalCoin(denomination, 5, MAX) << std::endl;

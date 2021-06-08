@@ -18,6 +18,9 @@
     <ClCompile Include="Lesson15-16.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Resource\Lesson9-10.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource\Lesson9-10.h">

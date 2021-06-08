@@ -188,6 +188,8 @@ void print1dArray(int* arr, int row);
 
 void quickSort(int* data, int const len);
 
+void fillIntRandom(int* array, int size, int border);
+
 int get2dInt(int** matrix, int row, int col);
 
 void set2dInt(int** matrix, int row, int col, int num);
