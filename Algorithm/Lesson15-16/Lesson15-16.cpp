@@ -54,11 +54,45 @@ Knot* findKnot(Knot** table, K data) {
 }
 
 void deleteKnot(Knot** table, K data) {
-
+	Knot* parent;
+	Knot* current;
+	parent = NULL;
+	htIndex bucket = hash(data);
+	current = table[bucket];
+	while (current && current->date != data) {
+		parent = current;
+		current = current->next;
+	}
+	if (!current) {
+		std::cout << "Value not found\n";
+		return;
+	}
+	if (parent)
+		parent->next = current->next;
+	else {
+		table[bucket] = current->next;
+	}
+	delete current;
 }
 
+
+void printTable(Knot** table, int size) {
+	Knot* p;
+	for (int i = 0; i < size; i++)
+	{
+		p = table[i];
+		while (p)
+		{
+			std::cout << p->date << " ";
+			p = p->next;
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
 int main()
 {
-
+	htSize = 8;
+	int* arr;
 	std::cout << "Hello World!\n";
 }
