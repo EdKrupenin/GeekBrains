@@ -28,11 +28,11 @@ htIndex hashString(std::string data, int Type) {
 	switch (Type)
 	{
 	case 0:
-		for (size_t i = 0; i <= length; i++)
-			hashCount += (int)data[length - i] * pow(countWord, i);
+		for (int i = 0; i <= length; i++)
+			hashCount += (int)data[length - i] * (int)pow(countWord, i);
 		break;
 	case 1:
-		for (size_t i = 0; i <= length; i++)
+		for (int i = 0; i <= length; i++)
 			hashCount += (int)data[i];
 		break;
 	default:
@@ -47,23 +47,22 @@ htIndex hashString(std::string data, int Type) {
 /// <param name="table">Ссылка на массив со списками</param>
 /// <param name="data">ключ</param>
 /// <returns>Результат операции</returns>
-boolean insertNode(Knot** table, K data) {
-	Knot* p;  //Указатель на новый узел в который будет записан переданный ключ
-	Knot* p0; //Указатель на старую голову списка к которой будет добавлен новый узел
+boolean insertNode(NodeOneLink** table, K data) {
+	NodeOneLink* p;  //Указатель на новый узел в который будет записан переданный ключ
+	NodeOneLink* p0; //Указатель на старую голову списка к которой будет добавлен новый узел
 
 	htIndex bucket = hash(data); //Индекс хэш-таблицы
-	p = new Knot;
+	p = new NodeOneLink;
 	if (p == NULL) {
 		std::cout << "Out of memory\n";
 		return false;
 	}
-	if (table[bucket] == NULL) table[bucket]->next == NULL;
+	//if (table[bucket] == NULL) table[bucket]->next == NULL;
 	//Указатель на текущую голову списка
 	p0 = table[bucket];
 	table[bucket] = p; //Запишем новую голову
 	p->next = p0;      //Припишем хвост новой голову
-	p->date = data;	   // Запишем данные в новую голову
-	p->name = char(data);
+	p->data = data;	   // Запишем данные в новую голову
 	return true;
 }
 
@@ -73,10 +72,10 @@ boolean insertNode(Knot** table, K data) {
 /// <param name="table">Ссылка на таблицу</param>
 /// <param name="data">Ключ</param>
 /// <returns>Узел или NULL</returns>
-Knot* findKnot(Knot** table, K data) {
-	Knot* p = table[hash(data)];
+NodeOneLink* findKnot(NodeOneLink** table, K data) {
+	NodeOneLink* p = table[hash(data)];
 	//В цикле while будем до тех пор пока не найдем дату или не пройдем весь список
-	while (p && p->date != data)
+	while (p && p->data != data)
 		p = p->next;
 	//если нашли дату то вернем узел, иначе вернем null
 	return p;
@@ -87,15 +86,15 @@ Knot* findKnot(Knot** table, K data) {
 /// </summary>
 /// <param name="table">Ссылка на хэш-таблицу со списками</param>
 /// <param name="data">Ключ который надо удалить</param>
-void deleteKnot(Knot** table, K data) {
-	Knot* parent; //Предок
-	Knot* current; //Значение которое анализируем
+void deleteKnot(NodeOneLink** table, K data) {
+	NodeOneLink* parent; //Предок
+	NodeOneLink* current; //Значение которое анализируем
 	parent = NULL; //Обнуляем предка
 	htIndex bucket = hash(data); //Вычисляем в каком именно списке предположительно
 	// будет наш ключ, с помощью хэш функции
 	current = table[bucket]; //достаем этот список из массива
 	//Проходим по списку пока он не кончиться или же пока не найдем ключ
-	while (current && current->date != data) {
+	while (current && current->data != data) {
 		parent = current;
 		current = current->next;
 	}
@@ -119,17 +118,17 @@ void deleteKnot(Knot** table, K data) {
 /// </summary>
 /// <param name="table">Ссылка на массив</param>
 /// <param name="size">Размер таблицы</param>
-void printTable(Knot** table, int size) {
-	Knot* current = NULL;
+void printTable(NodeOneLink** table, int size) {
+	NodeOneLink* current;
 	//Перебираем весь массив со списками
 	for (int i = 0; i < size; i++)
 	{
 		current = table[i]; //берем подряд каждый список
-		while (current != NULL) //Пока не дойдем до конца списка
+		while (current) //Пока не дойдем до конца списка
 		{
-			std::cout << current->date << " ";
+			std::cout << current->data << " ";
 			current = current->next;
-			current->date ? current : NULL;
+			//current->date ? current : NULL;
 		}
 		std::cout << std::endl;
 	}
@@ -147,7 +146,7 @@ int minimalCoin(int* denomination, int countCoin, int sum) {
 	int count = 0; //Счетчик монет
 	int countSum = 0; //Сумма из монет
 	//Проходим по всему массиву
-	for (size_t i = 0; i < countCoin; i++)
+	for (int i = 0; i < countCoin; i++)
 	{
 		// Пока можем добавляем номинал, как только ушли за пределы суммы
 		// переходим к следующему номиналу
@@ -162,24 +161,203 @@ int minimalCoin(int* denomination, int countCoin, int sum) {
 	return -1; //Из полученных монет нельзя набрать нужную сумму...
 }
 
+typedef struct {
+	int data;
+	int key;
+} KeyNode;
+
+KeyNode** openHashTable;
+int hashTableSize;
+
+KeyNode* nullItem;
+
+int hashFuncOpen(int key) {
+	return key % hashTableSize;
+}
+
+KeyNode* createNode(int data) {
+	return new KeyNode{ data,data };
+}
+
+void initTable(int length, int index) {
+	for (int i = index; i < length; i++) {
+		openHashTable[i] = NULL;
+	}
+}
+
+boolean isFull() {
+	for (int i = 0; i < hashTableSize; i++) {
+		if (openHashTable[i] == NULL || openHashTable[i] == nullItem)
+			return false;
+	}
+	return true;
+}
+
+boolean insertNode(int data);
+
+void increaseCapacity() {
+	hashTableSize *= 2;
+	KeyNode** oldHashTable = openHashTable;
+	openHashTable = new KeyNode * [hashTableSize];
+	int i;
+	for (i = 0; i < hashTableSize / 2; i++)
+	{
+		insertNode(oldHashTable[i]->data);
+	}
+	initTable(hashTableSize, i);
+	delete oldHashTable;
+}
+
+/// <summary>
+/// Линейное пробирование
+/// </summary>
+/// <param name="val">Индекс из хэш функции</param>
+/// <returns>смещение</returns>
+int linearProbe(int val) {
+	++val;
+	val %= hashTableSize; //Гарантированно останемся в пределах границ таблицы
+	return val;
+}
+
+/// <summary>
+///  Квадратичное пробирование
+/// </summary>
+/// <param name="val"></param>
+/// <param name="step"></param>
+/// <returns></returns>
+int quadProbe(int val, int step) {
+	val += step * step;
+	val %= hashTableSize;
+	return val;
+}
+
+/// <summary>
+/// Вторичная хэш функция
+/// </summary>
+/// <param name="key"></param>
+/// <returns></returns>
+int hashFuncDoub(int key) {
+	return 19 - key % 19;
+}
+
+boolean insertNode(int data) {
+	KeyNode* node = createNode(data);
+	if (!node) return false;
+	int hashVal = hashFuncOpen(node->key);
+	//Применим псевдодинамический массив, как только таблица будет заполняться то мы увеличим ее размер в 2 раза
+	if (isFull())
+		increaseCapacity();
+	//int step = 0; //Счетчик шагов!!!
+	int step = hashFuncDoub(node->key); //Шаг для определения места вставки
+	while (openHashTable[hashVal] && openHashTable[hashVal] != nullItem) { //Проверяем каждый раз что заполнена ли таблици, и чем она заполнена
+		//если пустое место или 0 то стопимся и прекращаем линейно пробировать
+		//hashVal = linearProbe(hashVal);
+		//hashVal = quadProbe(hashVal, ++step);
+		hashVal += step;
+		hashVal %= hashTableSize; // что бы не было переполнения
+	}
+	openHashTable[hashVal] = node;
+	return true;
+}
+
+KeyNode* findNode(int data) {
+	int key = data;
+	int hashVal = hashFuncOpen(key);
+	//int step = 0;
+	int step = hashFuncDoub(key);
+	while (openHashTable[hashVal] && openHashTable[hashVal] != nullItem) {
+		//Проверяем каждый раз что заполнена ли таблиц, и чем она заполнена
+		//если пустое место или 0 то стопимся и прекращаем линейно пробировать
+		if (openHashTable[hashVal]->key = key) {
+			return openHashTable[hashVal];
+		}
+		//hashVal = linearProbe(hashVal);
+		//hashVal = quadProbe(hashVal, ++step);
+		hashVal += step;
+		hashVal %= hashTableSize;
+	}
+	return NULL;
+}
+
+KeyNode* deleteNode(int data) {
+	int key = data;
+	int hashVal = hashFuncOpen(key);
+	//int step = 0;
+	int step = hashFuncDoub(key);
+	while (openHashTable[hashVal] && openHashTable[hashVal] != nullItem) {
+		//Проверяем каждый раз что заполнена ли таблици, и чем она заполнена
+		//если пустое место или 0 то стопимся и прекращаем линейно пробировать
+		if (openHashTable[hashVal]->key = key) {
+			return openHashTable[hashVal];
+			KeyNode* tmp = openHashTable[hashVal];
+			openHashTable[hashVal] = nullItem;
+			return tmp;
+		}
+		//hashVal = linearProbe(hashVal);
+		//hashVal = quadProbe(hashVal, ++step);
+		hashVal += step;
+		hashVal %= hashTableSize;
+	}
+	return NULL;
+}
+
+void printNode(KeyNode* n) {
+	if (!n) {
+		std::cout << "[*,*] ";
+		return;
+	}
+	std::cout << "[k= " << n->key << ", d= " << n->data << " ] ";
+}
+
+void prTable() {
+	for (int i = 0; i < hashTableSize; i++)
+	{
+		printNode(openHashTable[i]);
+	}
+	std::cout << std::endl;
+}
+
 int main()
 {
 	htSize = 8;
 	const int SZ = 20; //Размер массива
 	int* arr = new int[SZ];
 	fillIntRandom(arr, SZ, 100);
-	Knot** hashTable = new Knot * [htSize];
-	
+	NodeOneLink** hashTable = new NodeOneLink * [htSize];
+
 	for (size_t i = 0; i < SZ; i++)
 	{
 		insertNode(hashTable, arr[i]);
 	}
-	printKnot(findKnot(hashTable, 41));
-	printTable(hashTable, htSize);
+	printNode(findKnot(hashTable, 41));
+	//printTable(hashTable, htSize);
 
 	std::string words = "abc";
 	std::cout << "hash String = " << hashString(words, 1) << std::endl;
 	const int MAX = 98; //Максимальное значение
 	int denomination[] = { 50, 10, 5, 2, 1 }; //номинал монет
 	std::cout << "minimal Coin = " << minimalCoin(denomination, 5, MAX) << std::endl;
+
+	hashTableSize = 25;
+	openHashTable = new KeyNode * [hashTableSize];
+	initTable(hashTableSize, 0);
+	nullItem = createNode(-1);
+
+	insertNode(10);
+	insertNode(10);
+	insertNode(20);
+	insertNode(40); 
+	insertNode(50); 
+	insertNode(90); 
+	insertNode(88); 
+	insertNode(61); 
+	insertNode(11); 
+	insertNode(18); 
+	insertNode(10);
+	insertNode(11);
+	insertNode(10);
+	prTable();
+	return 0;
+
+
 }

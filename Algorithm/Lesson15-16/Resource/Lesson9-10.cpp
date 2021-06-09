@@ -339,6 +339,14 @@ void printKnot(Knot* k) {
 	std::cout << '[' <<k->name<<'-'<< k->date << ']';
 }
 
+void printNode(NodeOneLink* k) {
+	if (k == NULL) {
+		std::cout << "[]";
+		return;
+	}
+	std::cout << '[' << k->data << ']';
+}
+
 void printList(List* lst) {
 	Knot* current = lst->head;
 	if (current == NULL) printKnot(current);

@@ -14,6 +14,10 @@ typedef struct Knot {
 	struct Knot* next;
 }Knot;
 
+typedef struct NodeOneLink {
+	int data;
+	struct NodeOneLink* next;
+}NodeOneLink;
 /// <summary>
 /// Структура односвязного списка
 /// </summary>
@@ -87,7 +91,7 @@ void pushBack(DuoList* lst, char data);
 Node* rm(DuoList* lst, int data);
 Node* remFront(DuoList* lst);
 Node* remBack(DuoList* lst);
-void printNode(Node* k);
+void printNode(NodeOneLink* k);
 void printDuoList(DuoList* lst);
 #pragma endregion
 
