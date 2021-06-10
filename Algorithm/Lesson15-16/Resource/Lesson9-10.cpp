@@ -776,6 +776,16 @@ int** init2Array(int col, int row) {
 	return arr;
 }
 
+char** char2Array(int col, int row) {
+	char** arr = new char* [col];
+	arr[0] = new char[col * row];
+	for (size_t i = 1; i < col; i++)
+	{
+		arr[i] = arr[i - 1] + row;
+	}
+	return arr;
+}
+
 void clear2Araay(int** arr) {
 	delete[] arr[0];
 	delete[] arr;
@@ -847,6 +857,25 @@ void print2dArray(int** array, int row, int col) {
 		}
 		std::cout << std::endl;
 	}
+}
+
+void print2dCharArray(char** array, int row, int col) {
+	for (size_t i = 0; i < row; i++)
+	{
+		for (size_t j = 0; j < col; j++)
+		{
+			std::cout << array[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void print1dCharArray(char* arr, int row) {
+	for (size_t j = 0; j < row; j++)
+	{
+		std::cout << arr[j] << " ";
+	}
+	std::cout << std::endl;
 }
 
 void print1dArray(int* arr, int row) {

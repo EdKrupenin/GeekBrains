@@ -170,6 +170,8 @@ T dequeue(QueueList* lst);
 /// <returns>возвращаем ссылку на фрагмент выдленной памяти</returns>
 int** init2Array(int col, int row);
 
+char** char2Array(int col, int row);
+
 /// <summary>
 ///  Функция для очистки памяти
 /// </summary>
@@ -187,6 +189,10 @@ void clear2Araay(int** arr);
 void setLineValues(int** matrix, int cols, int row, int leghtAgrs, ...);
 
 void print2dArray(int** array, int row, int col);
+
+void print2dCharArray(char** array, int row, int col);
+
+void print1dCharArray(char* arr, int row);
 
 void print1dArray(int* arr, int row);
 
