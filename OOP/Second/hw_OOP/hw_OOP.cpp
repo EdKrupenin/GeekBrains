@@ -148,13 +148,13 @@ class Chip
 	int c_count = 0;
 	int c_denomination = 0;
 public:
-	Chip(int count, int denomination):c_count(count), c_denomination(denomination)
+	Chip(int count, int denomination) :c_count(count), c_denomination(denomination)
 	{}
 
-	
+
 };
 
- //A set of player's or dealer's cards.
+//A set of player's or dealer's cards.
 class Hand
 {
 	std::vector<Cards> h_Cards;
@@ -188,9 +188,10 @@ class Dealer : public Player
 
 
 //Tracking by the player the location of the cards during the game,
-class Tracking{/*"Движок игры"
+class Tracking {/*"Движок игры"
 	события добавления карт игроку и диллеру
-	математика карт игрока и диллера (набрали 21 - вышли)*/};
+	математика карт игрока и диллера (набрали 21 - вышли)*/
+};
 //A complete "game cycle"
 class Shuffle : public Tracking
 {
@@ -202,9 +203,26 @@ class Shuffle : public Tracking
 	 */
 };
 
+class A
+{
+public:
+	virtual void p(int)
+	{
+		std::cout << "A";
+	}
+};
+
+class B : public A
+{
+public:
+	virtual void p(long)
+	{
+		std::cout << "B";
+	}
+};
 
 
-class Game{};
+class Game {};
 
 int main()
 {
