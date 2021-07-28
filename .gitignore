@@ -15,3 +15,7 @@
 /OOP/Second/hw_OOP/x64/Debug
 /OOP/Second/Third HW/x64/Debug
 /OOP/Second/App4/Debug
+/OOP/Second/HW5/Debug
+*.user
+*.filters
+*.vcxproj
