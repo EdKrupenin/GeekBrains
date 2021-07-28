@@ -27,6 +27,6 @@ class Hand
 public:
 	void add_Card(Card* new_Card);
 	void h_Clear();
-	int h_get_total();
+	int h_get_total() const;
 };
 

@@ -10,7 +10,7 @@ void Hand::h_Clear()
 	m_Cards.clear();
 }
 
-int Hand::h_get_total()
+int Hand::h_get_total() const
 {
 	int total = 0;
 	bool flag_ace = false;
