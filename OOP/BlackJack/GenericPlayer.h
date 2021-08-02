@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
-#include <iostream>
+#include "Stdafx.h"
 #include "Hand.h"
+
 
 class GenericPlayer : public Hand
 {
@@ -29,5 +29,13 @@ public:
 	/// Выводит на экран имя игрока и объявляет, что у него перебор
 	/// </summary>
 	void Bust() const;
+
+	/// <summary>
+	/// Функция получения имени игрока
+	/// </summary>
+	/// <returns>Ссылку на строку с именем</returns>
+	const std::string get_Name() const;
+
+	friend std::ostream& operator<< (std::ostream& out, const GenericPlayer& player);
 };
 

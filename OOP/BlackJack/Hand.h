@@ -1,7 +1,6 @@
 #pragma once
-#include <vector>
+#include "Stdafx.h"
 #include "Card.h"
-
 /*
 
 Реализовать класс Hand, который представляет собой коллекцию карт.
@@ -23,8 +22,10 @@
 
 class Hand
 {
+protected:
 	std::vector<Card*> m_Cards;
 public:
+
 	void add_Card(Card* new_Card);
 	void h_Clear();
 	int h_get_total() const;

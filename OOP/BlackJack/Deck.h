@@ -1,6 +1,8 @@
 #pragma once
+#include "Stdafx.h"
 #include "Hand.h"
 #include "GenericPlayer.h"
+
 class Deck
 {
 public:
@@ -20,8 +22,6 @@ public:
 	/// Раздает игроку дополнительные карты до тех пор, пока он может и хочет их получать
 	/// </summary>
 	void AddltionalCards(GenericPlayer& aGenerlcPlayer);
-
-
 
 };
 

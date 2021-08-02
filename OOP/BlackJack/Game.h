@@ -1,8 +1,9 @@
 #pragma once
-#include "Deck.h"
-#include "House.h"
+#include "Stdafx.h"
 #include "Player.h"
-#include <vector>
+#include "House.h"
+#include "Deck.h"
+
 class Game
 {
 	/// <summary>

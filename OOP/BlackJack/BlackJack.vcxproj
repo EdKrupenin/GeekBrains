@@ -156,6 +156,7 @@
     <ClInclude Include="Hand.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Stdafx.h"
 /*4. Создать класс Card, описывающий карту в игре БлэкДжек. У этого класса должно быть три поля: масть, значение карты и положение карты (вверх лицом или рубашкой).
 Сделать поля масть и значение карты типом перечисления (enum). Положение карты - тип bool. Также в этом классе должно быть два метода:
 метод Flip(), который переворачивает карту, т.е. если она была рубашкой вверх, то он ее поворачивает лицом вверх, и наоборот.
@@ -40,6 +40,7 @@ enum class c_value : int
 /// Класс карты
 /// </summary>
 class Card {
+public:
 	/// <summary>
 	/// Масть карты
 	/// </summary>
@@ -53,9 +54,9 @@ class Card {
 	/// <summary>
 	/// Положение карты на столе
 	/// </summary>
-	bool conditionCard;
-public:
-	Card(c_suit Suit, c_value Value) : suitCard(Suit), valueCard(Value), conditionCard(false) {
+	bool is_Face_Up;
+
+	Card(c_suit Suit, c_value Value) : suitCard(Suit), valueCard(Value), is_Face_Up(false) {
 
 	}
 	/// <summary>
@@ -68,5 +69,6 @@ public:
 	/// </summary>
 	/// <returns>Значение карты</returns>
 	c_value get_value() const;
-};
 
+	friend std::ostream& operator<< (std::ostream& out, const Card& card);
+};

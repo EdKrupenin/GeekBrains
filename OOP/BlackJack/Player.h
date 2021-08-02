@@ -1,7 +1,17 @@
 #pragma once
-class Player
+#include "Stdafx.h"
+#include "GenericPlayer.h"
+#include "Hand.h"
+
+class Player : public GenericPlayer
 {
 public:
+	Player(const std::string name = "") : GenericPlayer(name)
+	{}
+
+	virtual ~Player()
+	{}
+
 	/// <summary>
 	/// ”казывает, нужна ли игроку еще одна карта
 	/// </summary>
