@@ -6,11 +6,9 @@
 class Player : public GenericPlayer
 {
 public:
-	Player(const std::string name = "") : GenericPlayer(name)
-	{}
+	Player(const std::string name = "");
 
-	virtual ~Player()
-	{}
+	virtual ~Player();
 
 	/// <summary>
 	/// ”казывает, нужна ли игроку еще одна карта

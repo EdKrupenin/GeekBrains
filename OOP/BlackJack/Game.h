@@ -19,6 +19,7 @@ class Game
 	/// </summary>
 	std::vector<Player> m_Players{};
 public:
+	Game(const std::vector<std::string>& names);
 	/// <summary>
 	/// Проводит кон игры Blackjack
 	/// </summary>

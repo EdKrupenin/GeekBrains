@@ -1,5 +1,10 @@
 #include "GenericPlayer.h"
 
+GenericPlayer::GenericPlayer(std::string name) : Hand(), m_Name(name)
+{
+
+}
+
 bool GenericPlayer::IsBoosted() const
 {
 	if (h_get_total() > 21)

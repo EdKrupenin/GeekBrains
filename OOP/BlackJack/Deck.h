@@ -3,9 +3,12 @@
 #include "Hand.h"
 #include "GenericPlayer.h"
 
-class Deck
+class Deck : public Hand
 {
 public:
+	Deck();
+
+	virtual ~Deck();
 	/// <summary>
 	/// Создает стандартную колоду из 52 карт
 	/// </summary>
@@ -21,7 +24,7 @@ public:
 	/// <summary>
 	/// Раздает игроку дополнительные карты до тех пор, пока он может и хочет их получать
 	/// </summary>
-	void AddltionalCards(GenericPlayer& aGenerlcPlayer);
+	void AddltionalCards(GenericPlayer& aGenericPlayer);
 
 };
 

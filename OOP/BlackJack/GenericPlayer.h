@@ -10,9 +10,7 @@ class GenericPlayer : public Hand
 	/// </summary>
 	std::string m_Name{};
 public:
-	GenericPlayer(std::string name) : Hand(), m_Name(name)
-	{}
-
+	GenericPlayer(std::string name);
 	/// <summary>
 	/// Указывает, нужна ли игроку еще одна карта.Чистая виртуальная функция
 	/// </summary>

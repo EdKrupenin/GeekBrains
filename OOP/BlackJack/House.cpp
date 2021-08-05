@@ -1,6 +1,14 @@
 #include "House.h"
 
 
+House::House(const std::string name) : GenericPlayer(name)
+{
+}
+
+House::~House()
+{
+}
+
 bool House::IsHitting() const
 {
     return (h_get_total() <= 16);

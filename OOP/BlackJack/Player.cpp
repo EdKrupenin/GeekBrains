@@ -1,5 +1,13 @@
 #include "Player.h"
 
+Player::Player(const std::string name) : GenericPlayer(name)
+{
+}
+
+Player::~Player()
+{
+}
+
 bool Player::IsHitting() const
 {
 	std::cout << get_Name() << ", do you want a hit? (Y/N): ";

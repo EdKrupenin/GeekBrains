@@ -6,11 +6,9 @@
 class House : public GenericPlayer
 {
 public:
-	House(const std::string name = "House") : GenericPlayer(name)
-	{}
+	House(const std::string name = "House");
 
-	virtual ~House()
-	{}
+	virtual ~House();
 
 	/// <summary>
 	/// ”казывает, нужна ли игроку еще одна карта
