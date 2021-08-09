@@ -8,6 +8,8 @@ Robot::Robot()
 
 Robot::Robot(int x, int y) : d_x(x), d_y(y)
 {
+	if ((x > 10) || (y > 10))
+		throw OffTheField(x, y);
 }
 
 

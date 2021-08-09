@@ -9,6 +9,7 @@ class OffTheField :
 	std::string d_message{};
 public:
 	OffTheField(direction dir, int x, int y);
+	OffTheField(int x, int y);
 	virtual char const* what() const override;
 };
 
