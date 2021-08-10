@@ -1,10 +1,11 @@
 #pragma once
 enum direction
 {
-	up = 0,
-	down,
-	right,
-	left,
-	Unknown
+	down = 8,
+	left = 4,
+	right = 6,
+	up = 2,
+	exi = 5,
+	Unknown = 0
 };
 

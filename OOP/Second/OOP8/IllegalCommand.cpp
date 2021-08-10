@@ -1,5 +1,6 @@
 #include "IllegalCommand.h"
 
+
 IllegalCommand::IllegalCommand(direction dir)
 {
 	std::stringstream message{};

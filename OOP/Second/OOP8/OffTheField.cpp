@@ -1,5 +1,6 @@
 #include "OffTheField.h"
 
+
 OffTheField::OffTheField(direction dir, int x, int y)
 {
 	std::stringstream message{};

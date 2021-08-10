@@ -1,15 +1,13 @@
 #pragma once
-#include <exception>
-#include <sstream>
 #include "Direction.h"
+#include "Exception.h"
 
 
-class IllegalCommand :
-	public std::exception
+class IllegalCommand : public Exception
+
 {
-	std::string d_message{};
 public:
 	IllegalCommand(direction dir);
-	virtual  const char* what() const override;
+	const char* what() const override;
 };
 

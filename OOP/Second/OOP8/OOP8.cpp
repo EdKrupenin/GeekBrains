@@ -10,7 +10,7 @@
 template<typename T>
 T divide(const T& rValue, const T& lValue)
 {
-	if (rValue == 0)
+	if (lValue == 0)
 		throw std::overflow_error("Divide by zero exception");
 	return  (rValue / lValue);
 }
@@ -44,19 +44,14 @@ int main()
 	Robot r = Robot();
 	try
 	{
-		r.move(static_cast<direction>(1));
+		do
+		{
+			r.play();
+		} while (direction::exi != r.getDirection());
 	}
-	catch (OffTheField& er2)
+	catch (Exception& er)
 	{
-		std::cout << er2.what() << std::endl;
-	}
-	try
-	{
-		r.move(static_cast<direction>(5));
-	}
-	catch (IllegalCommand& er1)
-	{
-		std::cout<<er1.what()<<std::endl;
+		std::cout << er.what() << std::endl;
 	}
 
 }

@@ -1,15 +1,12 @@
 #pragma once
-#include <exception>
-#include <sstream>
 #include "Direction.h"
+#include "Exception.h"
 
-class OffTheField :
-    public std::exception
+class OffTheField : public Exception
 {
-	std::string d_message{};
 public:
 	OffTheField(direction dir, int x, int y);
 	OffTheField(int x, int y);
-	virtual char const* what() const override;
+	char const* what() const override;
 };
 
