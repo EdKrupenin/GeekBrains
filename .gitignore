@@ -14,3 +14,21 @@
 /OOP/Second/hw_OOP/packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.4
 /OOP/Second/hw_OOP/x64/Debug
 /OOP/Second/Third HW/x64/Debug
+CppHardMoment/Lesson1/.vs/CMake Overview
+*.db
+CppHardMoment/Lesson1/.vs/Lesson1/v16/.suo
+*.ipch
+*.json
+*.sqlite
+CppHardMoment/Lesson1/out/build/x64-Debug/.ninja_deps
+CppHardMoment/Lesson1/out/build/x64-Debug/.ninja_log
+*.ninja
+CppHardMoment/Lesson1/out/build/x64-Debug/cmake_install.cmake
+*.txt
+*.cmake
+*.bin
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.log
