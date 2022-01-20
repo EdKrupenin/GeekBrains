@@ -32,13 +32,13 @@ bool Tank::isInside(double x1, double x2) const
 
 void Tank::Draw() const
 {
-	FileLoggerSingletone::GetInstance().SetColor(CC_Brown);
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 3);
+	MyTools::SetColor(CC_Brown);
+	GotoXY(x, y - 3);
 	cout << "    #####";
-	FileLoggerSingletone::GetInstance().GotoXY(x-2, y - 2);
+	GotoXY(x-2, y - 2);
 	cout << "#######   #";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 1);
+	GotoXY(x, y - 1);
 	cout << "    #####";
-	FileLoggerSingletone::GetInstance().GotoXY(x,y);
+	GotoXY(x,y);
 	cout << " ###########";
 }

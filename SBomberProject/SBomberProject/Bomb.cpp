@@ -9,7 +9,7 @@ using namespace MyTools;
 
 void Bomb::Draw() const
 {
-    FileLoggerSingletone::GetInstance().SetColor(CC_LightMagenta);
-    FileLoggerSingletone::GetInstance().GotoXY(x, y);
+    MyTools::SetColor(CC_LightMagenta);
+    GotoXY(x, y);
     cout << "*";
 }

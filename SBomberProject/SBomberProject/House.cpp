@@ -32,17 +32,17 @@ bool House::isInside(double x1, double x2) const
 
 void House::Draw() const
 {
-	MyTools::FileLoggerSingletone::GetInstance().SetColor(CC_Yellow);
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 5);
+	MyTools::SetColor(CC_Yellow);
+	GotoXY(x, y - 5);
 	cout << "  ########  ";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 4);
+	GotoXY(x, y - 4);
 	cout << "##        ##";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 3);
+	GotoXY(x, y - 3);
 	cout << "############";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 2);
+	GotoXY(x, y - 2);
 	cout << "#          #";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y - 1);
+	GotoXY(x, y - 1);
 	cout << "#          #";
-	FileLoggerSingletone::GetInstance().GotoXY(x, y);
+	GotoXY(x, y);
 	cout << "############";
 }
