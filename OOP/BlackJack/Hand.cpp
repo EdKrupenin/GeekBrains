@@ -10,11 +10,11 @@ void Hand::h_Clear()
 	m_Cards.clear();
 }
 
-int Hand::h_get_total()
+int Hand::h_get_total() const
 {
 	int total = 0;
 	bool flag_ace = false;
-	for (std::vector<Card*>::iterator card = m_Cards.begin(); card != m_Cards.end();++card) {
+	for (auto card = m_Cards.begin(); card != m_Cards.end();++card) {
 		Card* current_card = *card;
 		if (current_card->get_value() == c_value::ace) flag_ace = true;
 		total += static_cast<int>(current_card->get_value());
