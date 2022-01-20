@@ -65,10 +65,29 @@ namespace MyTools {
         uint16_t GetMaxY();
 
         void SetColor(ConsoleColor color);
+
+    	~ScreenSingleton()
+    	{
+            delete _initScreenSing;
+    	}
     };
+
+	class IFileLigger
+	{
+	public:
+        virtual void __fastcall OpenLogFile(const std::string& FN) = 0;
+
+        virtual void CloseLogFile() = 0;
+
+        virtual void __fastcall WriteToLog(const std::string& str) = 0;
+
+        virtual void __fastcall WriteToLog(const std::string& str, int n) = 0;
+
+        virtual void __fastcall WriteToLog(const std::string& str, double d) = 0;
+	};
 	
 	//=============================================================================================
-    class FileLoggerSingletone
+    class FileLoggerSingletone : public IFileLigger
     {
         FileLoggerSingletone() {}
         //Delete copy and assignment constructor
@@ -77,25 +96,55 @@ namespace MyTools {
         static FileLoggerSingletone* _initLoger;
         std::ofstream logOut{};
     public:
-        /// <summary>
+        ~FileLoggerSingletone()
+        {
+            delete _initLoger;
+        }
+    	/// <summary>
         /// Getter singletone class. Use lock guard for multithread
         /// </summary>
         /// <returns></returns>
         static FileLoggerSingletone& getInstance()
         {
             std::lock_guard<std::mutex> lock(m_loger);
-            return *(_initLoger ? _initLoger : new FileLoggerSingletone());
+            _initLoger = (_initLoger ? _initLoger : new FileLoggerSingletone());
+            return *_initLoger;
         }
-        void __fastcall OpenLogFile(const std::string& FN);
+            	
+        void __fastcall OpenLogFile(const std::string& FN) override;
 
-        void CloseLogFile();
+        void CloseLogFile() override;
 
-        void __fastcall WriteToLog(const std::string& str);
+        void __fastcall WriteToLog(const std::string& str) override;
 
-        void __fastcall WriteToLog(const std::string& str, int n);
+        void __fastcall WriteToLog(const std::string& str, int n) override;
 
-        void __fastcall WriteToLog(const std::string& str, double d);
+        void __fastcall WriteToLog(const std::string& str, double d) override;
     };
 	//=============================================================================================
 
+    class proxy_loger : public IFileLigger
+    {
+        FileLoggerSingletone& _initLoger;
+        int logCounter{};
+    public:
+       proxy_loger() : _initLoger(FileLoggerSingletone::getInstance()), logCounter(1)
+       {       }
+
+       ~proxy_loger()
+       {
+       }
+    	
+       void __fastcall OpenLogFile(const std::string& FN) override;
+
+       void CloseLogFile() override;
+
+       void __fastcall WriteToLog(const std::string& str) override;
+
+       void __fastcall WriteToLog(const std::string& str, int n) override;
+
+       void __fastcall WriteToLog(const std::string& str, double d) override;
+    };
+
+   
 };

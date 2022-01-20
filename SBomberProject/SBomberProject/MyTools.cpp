@@ -107,6 +107,41 @@ namespace MyTools {
         }
     }
 
+    void proxy_loger::OpenLogFile(const std::string& FN)
+    {
+    	//Proxy logic
+        _initLoger.OpenLogFile(FN);
+    }
+
+    void proxy_loger::CloseLogFile()
+    {
+        //Proxy logic
+        _initLoger.CloseLogFile();
+    }
+
+    void __fastcall proxy_loger::WriteToLog(const std::string& str)
+    {
+        //Proxy logic
+        std::string message = "Log count is"+ std::to_string(logCounter) + ' '+ str;
+        _initLoger.WriteToLog(message);
+        logCounter++;
+    }
+
+    void __fastcall proxy_loger::WriteToLog(const std::string& str, double d)
+    {
+        //Proxy logic
+        std::string message = "Log count is" + std::to_string(logCounter) + ' ' + str;
+        _initLoger.WriteToLog(message, d);
+        logCounter++;
+    }
+
+    void __fastcall proxy_loger::WriteToLog(const std::string& str, int n)
+    {
+        //Proxy logic
+        std::string message = "Log count is" + std::to_string(logCounter) + ' ' + str;
+        _initLoger.WriteToLog(message, n);
+        logCounter++;
+    }
     //=============================================================================================
 
 
