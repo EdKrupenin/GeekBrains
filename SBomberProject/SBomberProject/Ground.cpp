@@ -12,9 +12,9 @@ void Crater::Draw() const
 {
     if (width == SMALL_CRATER_SIZE) // Рисование воронки в 9 символов шириной
     {
-        GotoXY(x - 4, y + 1);
+        FileLoggerSingletone::GetInstance().GotoXY(x - 4, y + 1);
         cout << "==     ==";
-        GotoXY(x - 2, y + 2);
+        FileLoggerSingletone::GetInstance().GotoXY(x - 2, y + 2);
         cout << "=====";
     }
 }
@@ -34,7 +34,7 @@ bool Crater::isInside(double xn) const
 
 void Ground::Draw() const
 {
-    MyTools::SetColor(CC_Green);
+    MyTools::FileLoggerSingletone::GetInstance().SetColor(CC_Green);
 
     const size_t bufSize = width + 1;
     char* buf = new (nothrow) char[bufSize];
@@ -45,7 +45,7 @@ void Ground::Draw() const
 
     if (vecCrates.size() == 0)
     {
-        GotoXY(x, y);
+        FileLoggerSingletone::GetInstance().GotoXY(x, y);
         memset(buf, '=', bufSize);
         buf[bufSize - 1] = '\0';
         cout << buf;
@@ -60,7 +60,7 @@ void Ground::Draw() const
             buf[i - X] = c;
         }
 
-        GotoXY((double)X, y);
+        FileLoggerSingletone::GetInstance().GotoXY((double)X, y);
         buf[bufSize-1] = '\0';
         cout << buf;
 
