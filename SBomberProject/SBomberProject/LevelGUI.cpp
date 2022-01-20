@@ -8,9 +8,9 @@ using namespace MyTools;
 
 void LevelGUI::Draw() const
 {
-    MyTools::SetColor(CC_White);
+    MyTools::ScreenSingleton::getInstance().SetColor(CC_White);
 
-    GotoXY(x, y);
+    ScreenSingleton::getInstance().GotoXY(x, y);
     char* buf = new (nothrow) char[width + 1];
     if (buf == nullptr)
     {
@@ -19,26 +19,26 @@ void LevelGUI::Draw() const
     memset(buf, '+', width);
     buf[width] = '\0';
     cout << buf;
-    GotoXY(x, y + height);
+    ScreenSingleton::getInstance().GotoXY(x, y + height);
     cout << buf;
     delete [] buf;
     buf = nullptr;
     
     for (size_t i = size_t(y); i < height + y; i++)
     {
-        GotoXY(x, (double)i);
+        ScreenSingleton::getInstance().GotoXY(x, (double)i);
         cout << "+";
-        GotoXY(x + width - 1, (double)i);
+        ScreenSingleton::getInstance().GotoXY(x + width - 1, (double)i);
         cout << "+";
     }
 
-    GotoXY(3, 1);
+    ScreenSingleton::getInstance().GotoXY(3, 1);
     cout << "FramePerSecond: " << static_cast<int>(fps / (passedTime / 1000.0));
-    GotoXY(25, 1);
+    ScreenSingleton::getInstance().GotoXY(25, 1);
     cout << "PassedTime: " << static_cast<int>(passedTime / 1000.0) << " sec";
-    GotoXY(46, 1);
+    ScreenSingleton::getInstance().GotoXY(46, 1);
     cout << "BombsNum: " << bombsNumber;
-    GotoXY(62, 1);
+    ScreenSingleton::getInstance().GotoXY(62, 1);
     cout << "Score: " << score;
 }
 

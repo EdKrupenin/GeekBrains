@@ -9,7 +9,7 @@ using namespace MyTools;
 
 void Bomb::Draw() const
 {
-    MyTools::SetColor(CC_LightMagenta);
-    GotoXY(x, y);
+    ScreenSingleton::getInstance().SetColor(CC_LightMagenta);
+    ScreenSingleton::getInstance().GotoXY(x, y);
     cout << "*";
 }
