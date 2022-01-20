@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Lesson1" targetName="Lesson1" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c1b657e2-82b9-45c7-aa70-a2567747a549" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/BlackJack.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/BlackJack.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/BlackJack.vcxproj.filters" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/BlackJack.vcxproj.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/Card.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/Card.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/Hand.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/BlackJack/Hand.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/Second/App4/App4.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/Second/App4/ArrayInt.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/Second/App4/ArrayInt.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../OOP/Second/HW5/HW5.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LessonOne.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LessonOne.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LessonOne.h" beforeDir="false" afterPath="$PROJECT_DIR$/LessonOne.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OOP/Second/Third HW/Third HW.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Second/Third HW/Third HW.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OOP/Second/Third HW/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Second/Third HW/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OOP/Second/hw_OOP/hw_OOP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Second/hw_OOP/hw_OOP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OOP/Second/hw_OOP/hw_OOP.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Second/hw_OOP/hw_OOP.sln" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="22JbCN0M07ti6MkSFcxL9tATy5l" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Lesson1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Lesson1" TARGET_NAME="Lesson1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Lesson1" RUN_TARGET_NAME="Lesson1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c1b657e2-82b9-45c7-aa70-a2567747a549" name="Changes" comment="" />
+      <created>1639558510056</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639558510056</updated>
+      <workItem from="1639558511788" duration="49000" />
+      <workItem from="1639572096979" duration="621000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
