@@ -19,3 +19,7 @@ private:
 	const uint16_t score = 40;
 };
 
+class WinterHouse : public House
+{
+	void Draw() const override;
+};

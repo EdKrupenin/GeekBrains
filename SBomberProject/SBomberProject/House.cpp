@@ -46,3 +46,20 @@ void House::Draw() const
 	ScreenSingleton::getInstance().GotoXY(x, y);
 	cout << "############";
 }
+
+void WinterHouse::Draw() const
+{
+	MyTools::ScreenSingleton::getInstance().SetColor(CC_LightBlue);
+	ScreenSingleton::getInstance().GotoXY(x, y - 5);
+	cout << "  ########  ";
+	ScreenSingleton::getInstance().GotoXY(x, y - 4);
+	cout << "##        ##";
+	ScreenSingleton::getInstance().GotoXY(x, y - 3);
+	cout << "############";
+	ScreenSingleton::getInstance().GotoXY(x, y - 2);
+	cout << "#          #";
+	ScreenSingleton::getInstance().GotoXY(x, y - 1);
+	cout << "#          #";
+	ScreenSingleton::getInstance().GotoXY(x, y);
+	cout << "############";
+}

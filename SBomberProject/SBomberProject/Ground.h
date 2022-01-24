@@ -38,9 +38,20 @@ public:
 	void __fastcall AddCrater(double xn);
 
 private:
-
 	bool __fastcall isInsideAnyCrater(double x) const;
 
+	std::vector<Crater> vecCrates;
+};
+
+class WinterGround : public  Ground
+{
+public:
+	
+	void Draw() const override;
+
+private:
+	bool __fastcall isInsideAnyCrater(double x) const;
+	
 	std::vector<Crater> vecCrates;
 };
 

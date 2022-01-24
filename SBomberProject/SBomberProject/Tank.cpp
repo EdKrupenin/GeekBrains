@@ -42,3 +42,16 @@ void Tank::Draw() const
 	ScreenSingleton::getInstance().GotoXY(x,y);
 	cout << " ###########";
 }
+
+void WinterTank::Draw() const
+{
+	MyTools::ScreenSingleton::getInstance().SetColor(CC_White);
+	ScreenSingleton::getInstance().GotoXY(x, y - 3);
+	cout << "    #####";
+	ScreenSingleton::getInstance().GotoXY(x - 2, y - 2);
+	cout << "#######   #";
+	ScreenSingleton::getInstance().GotoXY(x, y - 1);
+	cout << "    #####";
+	ScreenSingleton::getInstance().GotoXY(x, y);
+	cout << " ###########";
+}

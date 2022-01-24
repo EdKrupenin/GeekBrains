@@ -8,6 +8,7 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include "WinterFactory.h"
 
 using namespace std;
 using namespace MyTools;
@@ -42,6 +43,11 @@ SBomber::SBomber()
     pGUI->SetFinishX(offset + width - 4);
     vecStaticObj.push_back(pGUI);
 
+	//Abstract Factory
+    pFactory = new WinterFactory;
+    pFactory->CreateLevel1(vecStaticObj);
+
+	/*
     Ground* pGr = new Ground;
     const uint16_t groundY = maxY - 5;
     pGr->SetPos(offset + 1, groundY);
@@ -62,6 +68,7 @@ SBomber::SBomber()
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
+	*/
 
     /*
     Bomb* pBomb = new Bomb;

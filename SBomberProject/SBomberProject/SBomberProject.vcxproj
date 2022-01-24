@@ -148,6 +148,7 @@
     <ClCompile Include="SBomber.cpp" />
     <ClCompile Include="SBomberProject.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="WinterFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bomb.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="SBomber.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="WinterFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
