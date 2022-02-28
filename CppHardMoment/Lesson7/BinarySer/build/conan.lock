@@ -1,0 +1,34 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "options": "protobuf:lite=False\nprotobuf:shared=False\nprotobuf:with_rtti=True\nprotobuf:with_zlib=True\nzlib:minizip=deprecated\nzlib:shared=False",
+    "requires": [
+     "1"
+    ],
+    "path": "..\\conanfile.txt",
+    "context": "host"
+   },
+   "1": {
+    "ref": "protobuf/3.17.1",
+    "options": "lite=False\nshared=False\nwith_rtti=True\nwith_zlib=True\nzlib:minizip=deprecated\nzlib:shared=False",
+    "package_id": "390b80578bf6c7353bb1fcd9b8fe1b4987dc6ea1",
+    "prev": "0",
+    "requires": [
+     "2"
+    ],
+    "context": "host"
+   },
+   "2": {
+    "ref": "zlib/1.2.11",
+    "options": "minizip=deprecated\nshared=False",
+    "package_id": "d057732059ea44a47760900cb5e4855d2bea8714",
+    "prev": "0",
+    "context": "host"
+   }
+  },
+  "revisions_enabled": false
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Debug\ncompiler=Visual Studio\ncompiler.runtime=MDd\ncompiler.version=16\nos=Windows\nos_build=Windows\n[options]\n[build_requires]\n[env]\n"
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Conan-RootDirs">
+    <Conan-protobuf-Root>C:\.conan\68ce89\1</Conan-protobuf-Root>
+    <Conan-zlib-Root>$(USERPROFILE)\.conan\data\zlib\1.2.11\_\_\package\d057732059ea44a47760900cb5e4855d2bea8714</Conan-zlib-Root>
+  </PropertyGroup>
+  <PropertyGroup Label="ConanVariables">
+    <ConanPackageName></ConanPackageName>
+    <ConanPackageVersion></ConanPackageVersion>
+    <ConanCompilerFlags></ConanCompilerFlags>
+    <ConanLinkerFlags></ConanLinkerFlags>
+    <ConanPreprocessorDefinitions></ConanPreprocessorDefinitions>
+    <ConanIncludeDirectories>C:\.conan\68ce89\1\include;$(USERPROFILE)\.conan\data\zlib\1.2.11\_\_\package\d057732059ea44a47760900cb5e4855d2bea8714\include;</ConanIncludeDirectories>
+    <ConanResourceDirectories></ConanResourceDirectories>
+    <ConanLibraryDirectories>C:\.conan\68ce89\1\lib;$(USERPROFILE)\.conan\data\zlib\1.2.11\_\_\package\d057732059ea44a47760900cb5e4855d2bea8714\lib;</ConanLibraryDirectories>
+    <ConanBinaryDirectories>C:\.conan\68ce89\1\bin;</ConanBinaryDirectories>
+    <ConanLibraries>libprotocd.lib;libprotobufd.lib;zlib.lib;</ConanLibraries>
+    <ConanSystemDeps></ConanSystemDeps>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LocalDebuggerEnvironment>PATH=%PATH%;C:\.conan\68ce89\1\bin;</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>$(ConanCompilerFlags) %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ConanLibraryDirectories)%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ConanLibraries)%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ConanSystemDeps)%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>$(ConanLinkerFlags) %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <Midl>
+      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </Midl>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(ConanIncludeDirectories)%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>$(ConanPreprocessorDefinitions)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>$(ConanCompilerFlags) %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
